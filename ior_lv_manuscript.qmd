@@ -94,7 +94,7 @@ Following our previous rationale, we predicted standard facilitation and IOR eff
 
 ## Method
 
-**Transparency and Openness.** The design, hypotheses and statistical analyses used in this study were preregistered before data collection began (<https://osf.io/fa6v9>). [All data, analysis code, and research materials are available at Zenodo (\[ZENODO DOI\]).]{.rev}
+**Transparency and Openness.** The design, hypotheses and statistical analyses used in this study were preregistered before data collection began (<https://osf.io/fa6v9>). [All data, analysis code, and research materials are available at Zenodo (<https://doi.org/10.5281/zenodo.23898537>).]{.rev}
 
 **Participants.** The sample size calculation was carried out using the G\*Power software [@faul2007]. However, there were no studies that had used a Posner-like task with manipulations regarding the color-reward association in the target. Some studies with a similar setting to the one used here were those of @failing2014 and @munneke2015, in which they associated the color of a peripheral cue with different amounts of reward. @failing2014 reported an interaction between Reward and exogenous cueing of $\eta_{p}^{2}$ = .301. @munneke2015 reported a reward main effect of $\eta_{p}^{2}$ = .413. For comparison, @perezduenas2014 reported a target valence main effect of $\eta_{p}^{2}$ = .779, and a cue x target valence interaction of $\eta_{p}^{2}$ = .043 for the long SOA (1000 ms). @silvert2016 reported effects of $\eta_{p}^{2}$ = .22 (Experiment 3) and $\eta_{p}^{2}$ = .17 (Experiment 4) for the same interaction.
 
@@ -158,7 +158,7 @@ The main goal of this second preregistered experiment was to explore why we did 
 
 ## Method
 
-**Transparency and Openness.** This second experiment was also preregistered. The material related to the experiment can be obtained at the following link: <https://osf.io/r2yf5>. [All data, analysis code, and research materials are available at Zenodo (\[ZENODO DOI\]).]{.rev}
+**Transparency and Openness.** This second experiment was also preregistered. The material related to the experiment can be obtained at the following link: <https://osf.io/r2yf5>. [All data, analysis code, and research materials are available at Zenodo (<https://doi.org/10.5281/zenodo.23898537>).]{.rev}
 
 **Participants.** For this second experiment, we decided to increase the sample from 40 to 60 participants, to try to enhance statistical power. The participants, as in the previous experiment, are students from the University of Granada who were contacted through the mailing lists. Participants were selected based on the eligibility criteria described in the previous experiment. The final sample consisted of 60 participants ($\text{M}_{age}$ = 22.22, $\text{SD}_{age}$ = 3.35; 49 women). As in the previous experiment, participants could receive up to 10 €, depending on their performance on the task (*M* = [`r num(mean(e2$earnings$euros))` €, *SD* = `r num(sd(e2$earnings$euros))` €]{.rev}), and the final sample was collected by 2021. No participants were excluded from the participant-level final analyses after data collection; trial-level exclusions are reported in the Data analysis section.
 
@@ -280,7 +280,7 @@ The study was approved by the Ethical Review Committee of the University of Gran
 
 # Data, code and availability
 
-The preregistration for Experiment 1 is available at <https://osf.io/fa6v9>. The preregistration for Experiment 2 is available at <https://osf.io/r2yf5>. [All data, analysis code, and research materials are available at Zenodo (\[ZENODO DOI\]).]{.rev}
+The preregistration for Experiment 1 is available at <https://osf.io/fa6v9>. The preregistration for Experiment 2 is available at <https://osf.io/r2yf5>. [All data, analysis code, and research materials are available at Zenodo (<https://doi.org/10.5281/zenodo.23898537>).]{.rev}
 
 # Funding
 

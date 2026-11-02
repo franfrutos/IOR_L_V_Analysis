@@ -32,4 +32,4 @@ Data, code, and materials are released under a [CC BY 4.0](LICENSE.md) license.
 
 - Preregistration of Experiment 1: <https://osf.io/fa6v9>
 - Preregistration of Experiment 2: <https://osf.io/r2yf5>
-- Zenodo repository: [ZENODO DOI]
+- Zenodo repository: <https://doi.org/10.5281/zenodo.23898537>
