@@ -1,0 +1,8 @@
+$-- psicologica_preprint.cls already sets up encodings and fonts
+$-- (T1 + utf8 inputenc under pdflatex, fontspec under xe/lualatex;
+$-- Source Sans + newtxsf). Do not load lmodern or unicode-math here.
+\usepackage{iftex}
+\ifPDFTeX
+  \input{glyphtounicode}\pdfgentounicode=1 % searchable/copyable text (e.g. Lupiáñez)
+  \renewcommand{\ttdefault}{lmtt} % Type 1 monospace font (avoids bitmap EC fonts)
+\fi

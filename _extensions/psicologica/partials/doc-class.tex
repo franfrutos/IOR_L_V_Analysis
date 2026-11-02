@@ -1,0 +1,3 @@
+$-- The class name is hard-coded: Quarto passes `documentclass` through
+$-- markdown, which would escape the underscore (psicologica\_preprint).
+\documentclass[$for(classoption)$$classoption$$sep$,$endfor$]{psicologica_preprint}

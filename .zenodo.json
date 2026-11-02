@@ -1,0 +1,36 @@
+{
+  "upload_type": "dataset",
+  "title": "Inhibition of Return and Learned Value: Data, code, and materials",
+  "description": "<p>Data, analysis code, results, and task materials for the manuscript \"Inhibition of Return and Learned Value\". The repository includes the trial-level data of Experiments 1 and 2, the OpenSesame tasks, the scripts used for all analyses, the cached results and figures, and the Quarto source file of the manuscript. See README.md for the structure of the repository and how to reproduce the analyses.</p>",
+  "creators": [
+    {
+      "name": "Garre-Frutos, Francisco",
+      "affiliation": "University of Granada",
+      "orcid": "0000-0001-9810-186X"
+    },
+    {
+      "name": "Lupiáñez, Juan",
+      "affiliation": "University of Granada",
+      "orcid": "0000-0001-6157-9894"
+    }
+  ],
+  "keywords": [
+    "learned value",
+    "selection history",
+    "inhibition of return",
+    "spatial cueing"
+  ],
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "https://osf.io/fa6v9",
+      "relation": "isDocumentedBy"
+    },
+    {
+      "identifier": "https://osf.io/r2yf5",
+      "relation": "isDocumentedBy"
+    }
+  ]
+}

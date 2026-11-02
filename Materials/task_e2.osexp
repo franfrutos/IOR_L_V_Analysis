@@ -1,0 +1,2601 @@
+---
+API: 2.1
+OpenSesame: 3.3.11
+Platform: nt
+---
+set width 1920
+set uniform_coordinates yes
+set title "IOR and Learned Value - Replication"
+set subject_parity even
+set subject_nr 0
+set start experiment
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set sampler_backend psycho
+set round_decimals 2
+set mouse_backend psycho
+set keyboard_backend psycho
+set height 1080
+set fullscreen no
+set form_clicks no
+set foreground white
+set font_underline no
+set font_size 24
+set font_italic no
+set font_family mono
+set font_bold no
+set experiment_path "C:/Users/franf/OneDrive/Escritorio/Máster/TFM"
+set disable_garbage_collection yes
+set description "The main experiment item"
+set coordinates uniform
+set compensation 0
+set color_backend psycho
+set clock_backend psycho
+set canvas_backend psycho
+set background black
+
+define loop Awaraness_Block
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run Awareness_Sequence
+
+define sequence Awareness_Sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run awarness_first_loop always
+	run blank always
+	run pre_recognition always
+	run pre_recognition_response always
+	run Reset_2 always
+	run recognition_loop always
+	run blank always
+	run pre_second always
+	run pre_second_response always
+	run blank always
+	run awarness_second_loop always
+
+define loop Awarness_first_block
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 first_question "4;5;6"
+	run awarness__first_trial
+
+define loop Cut_RT_Block
+	set source table
+	set repeat 2
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 32
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 SOA 50
+	setcycle 0 color red
+	setcycle 0 correct_response Z
+	setcycle 0 cue left
+	setcycle 0 cueing Cued
+	setcycle 0 letter Z
+	setcycle 0 targetpos -252
+	setcycle 1 SOA 950
+	setcycle 1 color red
+	setcycle 1 correct_response Z
+	setcycle 1 cue left
+	setcycle 1 cueing Cued
+	setcycle 1 letter Z
+	setcycle 1 targetpos -252
+	setcycle 2 SOA 50
+	setcycle 2 color green
+	setcycle 2 correct_response Z
+	setcycle 2 cue left
+	setcycle 2 cueing Cued
+	setcycle 2 letter Z
+	setcycle 2 targetpos -252
+	setcycle 3 SOA 950
+	setcycle 3 color green
+	setcycle 3 correct_response Z
+	setcycle 3 cue left
+	setcycle 3 cueing Cued
+	setcycle 3 letter Z
+	setcycle 3 targetpos -252
+	setcycle 4 SOA 50
+	setcycle 4 color red
+	setcycle 4 correct_response Z
+	setcycle 4 cue right
+	setcycle 4 cueing Uncued
+	setcycle 4 letter Z
+	setcycle 4 targetpos -252
+	setcycle 5 SOA 950
+	setcycle 5 color red
+	setcycle 5 correct_response Z
+	setcycle 5 cue right
+	setcycle 5 cueing Uncued
+	setcycle 5 letter Z
+	setcycle 5 targetpos -252
+	setcycle 6 SOA 50
+	setcycle 6 color green
+	setcycle 6 correct_response Z
+	setcycle 6 cue right
+	setcycle 6 cueing Uncued
+	setcycle 6 letter Z
+	setcycle 6 targetpos -252
+	setcycle 7 SOA 950
+	setcycle 7 color green
+	setcycle 7 correct_response Z
+	setcycle 7 cue right
+	setcycle 7 cueing Uncued
+	setcycle 7 letter Z
+	setcycle 7 targetpos -252
+	setcycle 8 SOA 50
+	setcycle 8 color red
+	setcycle 8 correct_response M
+	setcycle 8 cue left
+	setcycle 8 cueing Cued
+	setcycle 8 letter M
+	setcycle 8 targetpos -252
+	setcycle 9 SOA 950
+	setcycle 9 color red
+	setcycle 9 correct_response M
+	setcycle 9 cue left
+	setcycle 9 cueing Cued
+	setcycle 9 letter M
+	setcycle 9 targetpos -252
+	setcycle 10 SOA 50
+	setcycle 10 color green
+	setcycle 10 correct_response M
+	setcycle 10 cue left
+	setcycle 10 cueing Cued
+	setcycle 10 letter M
+	setcycle 10 targetpos -252
+	setcycle 11 SOA 950
+	setcycle 11 color green
+	setcycle 11 correct_response M
+	setcycle 11 cue left
+	setcycle 11 cueing Cued
+	setcycle 11 letter M
+	setcycle 11 targetpos -252
+	setcycle 12 SOA 50
+	setcycle 12 color red
+	setcycle 12 correct_response M
+	setcycle 12 cue right
+	setcycle 12 cueing Uncued
+	setcycle 12 letter M
+	setcycle 12 targetpos -252
+	setcycle 13 SOA 950
+	setcycle 13 color red
+	setcycle 13 correct_response M
+	setcycle 13 cue right
+	setcycle 13 cueing Uncued
+	setcycle 13 letter M
+	setcycle 13 targetpos -252
+	setcycle 14 SOA 50
+	setcycle 14 color green
+	setcycle 14 correct_response M
+	setcycle 14 cue right
+	setcycle 14 cueing Uncued
+	setcycle 14 letter M
+	setcycle 14 targetpos -252
+	setcycle 15 SOA 950
+	setcycle 15 color green
+	setcycle 15 correct_response M
+	setcycle 15 cue right
+	setcycle 15 cueing Uncued
+	setcycle 15 letter M
+	setcycle 15 targetpos -252
+	setcycle 16 SOA 50
+	setcycle 16 color red
+	setcycle 16 correct_response Z
+	setcycle 16 cue left
+	setcycle 16 cueing Uncued
+	setcycle 16 letter Z
+	setcycle 16 targetpos 252
+	setcycle 17 SOA 950
+	setcycle 17 color red
+	setcycle 17 correct_response Z
+	setcycle 17 cue left
+	setcycle 17 cueing Uncued
+	setcycle 17 letter Z
+	setcycle 17 targetpos 252
+	setcycle 18 SOA 50
+	setcycle 18 color green
+	setcycle 18 correct_response Z
+	setcycle 18 cue left
+	setcycle 18 cueing Uncued
+	setcycle 18 letter Z
+	setcycle 18 targetpos 252
+	setcycle 19 SOA 950
+	setcycle 19 color green
+	setcycle 19 correct_response Z
+	setcycle 19 cue left
+	setcycle 19 cueing Uncued
+	setcycle 19 letter Z
+	setcycle 19 targetpos 252
+	setcycle 20 SOA 50
+	setcycle 20 color red
+	setcycle 20 correct_response Z
+	setcycle 20 cue right
+	setcycle 20 cueing Cued
+	setcycle 20 letter Z
+	setcycle 20 targetpos 252
+	setcycle 21 SOA 950
+	setcycle 21 color red
+	setcycle 21 correct_response Z
+	setcycle 21 cue right
+	setcycle 21 cueing Cued
+	setcycle 21 letter Z
+	setcycle 21 targetpos 252
+	setcycle 22 SOA 50
+	setcycle 22 color green
+	setcycle 22 correct_response Z
+	setcycle 22 cue right
+	setcycle 22 cueing Cued
+	setcycle 22 letter Z
+	setcycle 22 targetpos 252
+	setcycle 23 SOA 950
+	setcycle 23 color green
+	setcycle 23 correct_response Z
+	setcycle 23 cue right
+	setcycle 23 cueing Cued
+	setcycle 23 letter Z
+	setcycle 23 targetpos 252
+	setcycle 24 SOA 50
+	setcycle 24 color red
+	setcycle 24 correct_response M
+	setcycle 24 cue left
+	setcycle 24 cueing Uncued
+	setcycle 24 letter M
+	setcycle 24 targetpos 252
+	setcycle 25 SOA 950
+	setcycle 25 color red
+	setcycle 25 correct_response M
+	setcycle 25 cue left
+	setcycle 25 cueing Uncued
+	setcycle 25 letter M
+	setcycle 25 targetpos 252
+	setcycle 26 SOA 50
+	setcycle 26 color green
+	setcycle 26 correct_response M
+	setcycle 26 cue left
+	setcycle 26 cueing Uncued
+	setcycle 26 letter M
+	setcycle 26 targetpos 252
+	setcycle 27 SOA 950
+	setcycle 27 color green
+	setcycle 27 correct_response M
+	setcycle 27 cue left
+	setcycle 27 cueing Uncued
+	setcycle 27 letter M
+	setcycle 27 targetpos 252
+	setcycle 28 SOA 50
+	setcycle 28 color red
+	setcycle 28 correct_response M
+	setcycle 28 cue right
+	setcycle 28 cueing Cued
+	setcycle 28 letter M
+	setcycle 28 targetpos 252
+	setcycle 29 SOA 950
+	setcycle 29 color red
+	setcycle 29 correct_response M
+	setcycle 29 cue right
+	setcycle 29 cueing Cued
+	setcycle 29 letter M
+	setcycle 29 targetpos 252
+	setcycle 30 SOA 50
+	setcycle 30 color green
+	setcycle 30 correct_response M
+	setcycle 30 cue right
+	setcycle 30 cueing Cued
+	setcycle 30 letter M
+	setcycle 30 targetpos 252
+	setcycle 31 SOA 950
+	setcycle 31 color green
+	setcycle 31 correct_response M
+	setcycle 31 cue right
+	setcycle 31 cueing Cued
+	setcycle 31 letter M
+	setcycle 31 targetpos 252
+	run Cut_RT_sequence
+
+define inline_javascript Cut_RT_in
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	vars.response_time_keyboard_response=Math.round(vars.response_time_keyboard_response)
+	
+	vars.RT=vars.response_time_keyboard_response
+	vars.sum_RT+=vars.RT
+	vars.mean_RT=(vars.sum_RT/64)
+	
+	vars.arrayRT.push(vars.RT)
+	if (vars.trial_count==64){
+	let i;
+	for(i = 0; i < 64;i++){
+	  vars.arrayRT[i] = Math.pow((vars.arrayRT[i]-vars.mean_RT),2);
+	  vars.sumsqr += vars.arrayRT[i]
+	};
+	vars.cut_rt_above = vars.mean_RT + Math.sqrt(vars.sumsqr/64)}
+	__end__
+	set _prepare ""
+
+define inline_javascript Cut_RT_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	vars.response_time_keyboard_response=Math.round(vars.response_time_keyboard_response)
+	
+	vars.RT=vars.response_time_keyboard_response
+	vars.sum_RT+=vars.RT
+	vars.mean_RT=(vars.sum_RT/64)
+	
+	if (vars.trial_count_prac2==1){vars.RT1=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==2){vars.RT2=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==2){vars.RT2=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==3){vars.RT3=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==4){vars.RT4=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==5){vars.RT5=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==6){vars.RT6=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==7){vars.RT7=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==8){vars.RT8=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==9){vars.RT9=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==10){vars.RT10=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==11){vars.RT11=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==12){vars.RT12=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==13){vars.RT13=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==14){vars.RT14=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==15){vars.RT15=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==16){vars.RT16=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==17){vars.RT17=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==18){vars.RT18=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==19){vars.RT19=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==20){vars.RT20=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==21){vars.RT21=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==22){vars.RT22=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==23){vars.RT23=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==24){vars.RT24=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==25){vars.RT25=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==26){vars.RT26=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==27){vars.RT27=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==28){vars.RT28=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==29){vars.RT29=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==30){vars.RT30=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==31){vars.RT31=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==32){vars.RT32=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==33){vars.RT33=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==34){vars.RT34=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==35){vars.RT35=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==36){vars.RT36=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==37){vars.RT37=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==38){vars.RT38=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==39){vars.RT39=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==40){vars.RT40=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==41){vars.RT41=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==42){vars.RT42=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==43){vars.RT43=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==44){vars.RT44=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==45){vars.RT45=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==46){vars.RT46=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==47){vars.RT47=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==48){vars.RT48=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==49){vars.RT49=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==50){vars.RT50=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==51){vars.RT51=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==52){vars.RT52=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==53){vars.RT53=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==54){vars.RT54=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==55){vars.RT55=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==56){vars.RT56=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==57){vars.RT57=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==58){vars.RT58=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==59){vars.RT59=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==60){vars.RT60=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==61){vars.RT61=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==62){vars.RT62=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==63){vars.RT63=vars.response_time_keyboard_response}
+	else if (vars.trial_count_prac2==64){vars.RT64=vars.response_time_keyboard_response}
+	
+	if (vars.trial_count_prac2==64){
+	vars.dif1=Math.pow((vars.RT1-vars.mean_RT),2);
+	vars.dif2=Math.pow((vars.RT2-vars.mean_RT),2);
+	vars.dif3=Math.pow((vars.RT3-vars.mean_RT),2);
+	vars.dif4=Math.pow((vars.RT4-vars.mean_RT),2);
+	vars.dif5=Math.pow((vars.RT5-vars.mean_RT),2);
+	vars.dif6=Math.pow((vars.RT6-vars.mean_RT),2);
+	vars.dif7=Math.pow((vars.RT7-vars.mean_RT),2);
+	vars.dif8=Math.pow((vars.RT8-vars.mean_RT),2);
+	vars.dif9=Math.pow((vars.RT9-vars.mean_RT),2);
+	vars.dif10=Math.pow((vars.RT10-vars.mean_RT),2);
+	vars.dif11=Math.pow((vars.RT11-vars.mean_RT),2);
+	vars.dif12=Math.pow((vars.RT12-vars.mean_RT),2);
+	vars.dif13=Math.pow((vars.RT13-vars.mean_RT),2);
+	vars.dif14=Math.pow((vars.RT14-vars.mean_RT),2);
+	vars.dif15=Math.pow((vars.RT15-vars.mean_RT),2);
+	vars.dif16=Math.pow((vars.RT16-vars.mean_RT),2);
+	vars.dif17=Math.pow((vars.RT17-vars.mean_RT),2);
+	vars.dif18=Math.pow((vars.RT18-vars.mean_RT),2);
+	vars.dif19=Math.pow((vars.RT19-vars.mean_RT),2);
+	vars.dif20=Math.pow((vars.RT20-vars.mean_RT),2);
+	vars.dif21=Math.pow((vars.RT21-vars.mean_RT),2);
+	vars.dif22=Math.pow((vars.RT22-vars.mean_RT),2);
+	vars.dif23=Math.pow((vars.RT23-vars.mean_RT),2);
+	vars.dif24=Math.pow((vars.RT24-vars.mean_RT),2);
+	vars.dif25=Math.pow((vars.RT25-vars.mean_RT),2);
+	vars.dif26=Math.pow((vars.RT26-vars.mean_RT),2);
+	vars.dif27=Math.pow((vars.RT27-vars.mean_RT),2);
+	vars.dif28=Math.pow((vars.RT28-vars.mean_RT),2);
+	vars.dif29=Math.pow((vars.RT29-vars.mean_RT),2);
+	vars.dif30=Math.pow((vars.RT30-vars.mean_RT),2);
+	vars.dif31=Math.pow((vars.RT31-vars.mean_RT),2);
+	vars.dif32=Math.pow((vars.RT32-vars.mean_RT),2);
+	vars.dif33=Math.pow((vars.RT33-vars.mean_RT),2);
+	vars.dif34=Math.pow((vars.RT34-vars.mean_RT),2);
+	vars.dif35=Math.pow((vars.RT35-vars.mean_RT),2);
+	vars.dif36=Math.pow((vars.RT36-vars.mean_RT),2);
+	vars.dif37=Math.pow((vars.RT37-vars.mean_RT),2);
+	vars.dif38=Math.pow((vars.RT38-vars.mean_RT),2);
+	vars.dif39=Math.pow((vars.RT39-vars.mean_RT),2);
+	vars.dif40=Math.pow((vars.RT40-vars.mean_RT),2);
+	vars.dif41=Math.pow((vars.RT41-vars.mean_RT),2);
+	vars.dif42=Math.pow((vars.RT42-vars.mean_RT),2);
+	vars.dif43=Math.pow((vars.RT43-vars.mean_RT),2);
+	vars.dif44=Math.pow((vars.RT44-vars.mean_RT),2);
+	vars.dif45=Math.pow((vars.RT45-vars.mean_RT),2);
+	vars.dif46=Math.pow((vars.RT46-vars.mean_RT),2);
+	vars.dif47=Math.pow((vars.RT47-vars.mean_RT),2);
+	vars.dif48=Math.pow((vars.RT48-vars.mean_RT),2);
+	vars.dif49=Math.pow((vars.RT49-vars.mean_RT),2);
+	vars.dif50=Math.pow((vars.RT50-vars.mean_RT),2);
+	vars.dif51=Math.pow((vars.RT51-vars.mean_RT),2);
+	vars.dif52=Math.pow((vars.RT52-vars.mean_RT),2);
+	vars.dif53=Math.pow((vars.RT53-vars.mean_RT),2);
+	vars.dif54=Math.pow((vars.RT54-vars.mean_RT),2);
+	vars.dif55=Math.pow((vars.RT55-vars.mean_RT),2);
+	vars.dif56=Math.pow((vars.RT56-vars.mean_RT),2);
+	vars.dif57=Math.pow((vars.RT57-vars.mean_RT),2);
+	vars.dif58=Math.pow((vars.RT58-vars.mean_RT),2);
+	vars.dif59=Math.pow((vars.RT59-vars.mean_RT),2);
+	vars.dif60=Math.pow((vars.RT60-vars.mean_RT),2);
+	vars.dif61=Math.pow((vars.RT61-vars.mean_RT),2);
+	vars.dif62=Math.pow((vars.RT62-vars.mean_RT),2);
+	vars.dif63=Math.pow((vars.RT63-vars.mean_RT),2);
+	vars.dif64=Math.pow((vars.RT64-vars.mean_RT),2);
+	} else {vars.trial_count_prac2=vars.trial_count_prac2}
+	
+	if (vars.trial_count_prac2==64){vars.sum_squares1=(vars.dif1+vars.dif2+vars.dif3+vars.dif4+vars.dif5+vars.dif6+vars.dif7+vars.dif8+vars.dif9+vars.dif10)/63;
+	vars.sum_squares2=(vars.dif11+vars.dif12+vars.dif13+vars.dif14+vars.dif15+vars.dif16+vars.dif17+vars.dif18+vars.dif19+vars.dif20)/63;
+	vars.sum_squares3=(vars.dif21+vars.dif22+vars.dif23+vars.dif24+vars.dif25+vars.dif26+vars.dif27+vars.dif28+vars.dif29+vars.dif30)/63;
+	vars.sum_squares4=(vars.dif31+vars.dif32+vars.dif33+vars.dif34+vars.dif35+vars.dif36+vars.dif37+vars.dif38+vars.dif39+vars.dif40)/63;
+	vars.sum_squares5=(vars.dif41+vars.dif42+vars.dif43+vars.dif44+vars.dif45+vars.dif46+vars.dif47+vars.dif48+vars.dif49+vars.dif50)/63;
+	vars.sum_squares6=(vars.dif51+vars.dif52+vars.dif53+vars.dif54+vars.dif55+vars.dif56+vars.dif57+vars.dif58+vars.dif59+vars.dif60)/63;
+	vars.sum_squares7=(vars.dif61+vars.dif62+vars.dif63+vars.dif64)/63;
+	vars.totalSD=vars.sum_squares1+vars.sum_squares2+vars.sum_squares3+vars.sum_squares4+vars.sum_squares5+vars.sum_squares6+vars.sum_squares7;
+	vars.SD=Math.sqrt(vars.totalSD)
+	vars.cut_rt_above = vars.mean_RT + vars.SD;
+	vars.cut_rt_below = vars.mean_RT - vars.SD
+	}
+	else {vars.trial_count_prac2=vars.trial_count_prac2}
+	__end__
+	set _prepare ""
+
+define sequence Cut_RT_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run trial_count always
+	run fixation always
+	run cue always
+	run SOA always
+	run target always
+	run targetresp always
+	run keyboard_response always
+	run Prac_response_feedback always
+	run RT_feedback "[response_time_keyboard_response]>1200 or [response_time_keyboard_response]<200"
+	run Cut_RT_inline always
+	run logger always
+
+define inline_javascript Cut_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run ""
+	set _prepare ""
+
+define sketchpad End
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Ahora sí, ¡has terminado el experimento!<br /><br />¡Muchas gracias por participar!<br /><br />Recuerda apuntar tu código de participante: [code]<br /><br /><br />Pulsa la barra espaciadora para salir del experimento." x=0 y=0 z_index=0
+
+define keyboard_response End_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define sketchpad Instructions
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Tu tarea a lo largo del experimento consistirá en distinguir entre dos letras <br />que podrán aparecer a la izquierda o a la derecha <br />de una cruz que hará las veces de punto de fijación.  <br /> <br /> Mientras mantienes la vista en el punto de fijación, deberás indicar qué letra<br /> aparece en pantalla pulsando la tecla z o m de tu ordenador:<br /> <br /> Si aparece la letra Z, pulsa la tecla z.<br /> Si aparece la letra M, pulsa la tecla m.<br /><br />Asegurate de ignorar todo aquello que no este relacionado<br />con la forma de las letras, como el color en el <br />que se presentan o cualquier otro estímulo.<br /> <br /> Antes de empezar, vamos a realizar unos ensayos de práctica.<br /> <br /> Si lo has entendido todo, pulsa la barra espaciadora para comenzar. " x=0 y=0 z_index=0
+
+define feedback Prac_response_feedback
+	set reset_variables yes
+	set duration 750
+	set description "Proporciona feedback al participante"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=50 html=yes show_if="[correct_keyboard_response]==1" text="¡Correcto!" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=50 html=yes show_if="[correct_keyboard_response]==0" text=Incorrecto x=0 y=0 z_index=0
+
+define sketchpad Pre_Cut
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Ya has terminado la fase de práctica.<br /><br />Ahora vamos a realizar un bloque de ensayos muy similar a lo que te encontrarás durante <br />el experimento, para poder comprobar cual es tu desempeño general antes de comenzar. <br /><br />Trata de responder de la forma más rápida y precisa que te sea posible.<br /><br />Antes de empezar, recuerda las instrucciones:<br /><br /><br />Si aparece la letra Z, pulsa la tecla z.<br />Si aparece la letra M, pulsa la tecla m.<br /><br /><br />Cuando quieras empezar, pulsa la barra espaciadora. " x=0 y=0 z_index=0
+
+define keyboard_response Pre_Cut_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define sketchpad Pre_no_rew_exp
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Lo has hecho muy bien. Sin embargo, para terminar el experimento vas a tener que<br />completar unos cuantos ensayos más.<br /><br />Vas a realizar la misma tarea, pero ya no ganarás o perderás puntos ni recibiras <br />feedback de ningún tipo. <br /><br />Aun así, trata de responder de la forma más<br />precisa y rápida que te sea posible. <br /><br />Cuando quieras volver a empezar pulsa la barra espaciadora." x=0 y=0 z_index=0
+
+define feedback RT_feedback
+	set reset_variables yes
+	set duration 750
+	set description "Proporciona feedback al participante"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=40 html=yes show_if="[response_time_keyboard_response]<200" text="Demasiado rápido" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=40 html=yes show_if="[response_time_keyboard_response]>1300" text="Demasiado lento" x=0 y=0 z_index=0
+
+define feedback Repeat
+	set reset_variables yes
+	set duration 0
+	set description "Proporciona feedback al participante"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Vas a volver a repetir la fase de práctica para poder asegurarnos de que no<br />tengas porblemas cuando comience el experimento. <br /><br />Pulsa la barra espaciadora cuando quieras volver a empezar." x=0 y=0 z_index=0
+
+define keyboard_response Repeat_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define inline_javascript Reset
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	vars.trial_count_prac=0
+	vars.trial_count_prac2=0
+	vars.trial_count_rew=0
+	vars.trial_count_norew=0
+	vars.block_count=1
+	vars.type=0
+	vars.money_final=0
+	__end__
+	set _prepare ""
+
+define inline_javascript Reset_1
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	vars.trial_count_prac=0
+	vars.trial_count_prac2=0
+	vars.trial_count_rew=0
+	vars.trial_count_norew=0
+	vars.block_count=8
+	vars.type=0
+	__end__
+	set _prepare ""
+
+define inline_javascript Reset_2
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	vars.trial_count_prac=0
+	vars.trial_count_prac2=0
+	vars.trial_count_rew=0
+	vars.trial_count_norew=0
+	vars.block_count=0
+	vars.type=0
+	vars.trial_count=0
+	vars.previus=0
+	__end__
+	set _prepare ""
+
+define inline_javascript Response_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	if ((vars.type=='high') && (vars.response_recognition_response=='d')){vars.correct_recognition_response=1}
+	else if ((vars.type=='low') && (vars.response_recognition_response=='k')){vars.correct_recognition_response=1}
+	else {vars.correct_recognition_response=0}
+	__end__
+	set _prepare ""
+
+define sequence Rest_exp
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run Reset always
+	run blank always
+	run post_cut always
+	run post_cut_response always
+	run pre_exp always
+	run pre_exp_response always
+	run exp_rew_loop always
+	run Reset_1 always
+	run blank always
+	run Pre_no_rew_exp always
+	run pre_no_rew_response always
+	run exp_no_rew_loop always
+
+define sketchpad Rest_norew
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Has terminado un bloque experimental.<br /><br />Descansa hasta que creas que puedes volver a empezar.<br /><br /><br />Pulsa la barra espaciadora para comenzar con el siguiente bloque. " x=0 y=0 z_index=0
+
+define keyboard_response Rest_norew_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define feedback Rest_rew
+	set reset_variables yes
+	set duration 0
+	set description "Proporciona feedback al participante"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Has terminado un bloque experimental.<br /><br />Llevas [counter_value] puntos.<br /><br />Por tanto, de momento has ganado [money]€.<br /><br /><br />Descansa hasta que creas que puedas volver a empezar.<br /><br /><br />Pulsa la barra espaciadora para comenzar con el siguiente bloque. " x=0 y=0 z_index=0
+
+define keyboard_response Rest_rew_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define sketchpad SOA
+	set duration "[SOA]"
+	set description "Muestra estímulos"
+	draw line color=grey penwidth=4 show_if=always x1=0 x2=0 y1=-15 y2=15 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=-15 x2=15 y1=0 y2=0 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=-316 y=-64 z_index=0
+	draw rect color=grey fill=0 h=-128 penwidth=3 show_if=always w=128 x=188 y=64 z_index=0
+
+define sequence awarness__first_trial
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run new_reset_feedback_1 always
+	run first_question always
+	run first_question_response always
+	run logger always
+
+define loop awarness_first_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run awarness_first_sequence
+
+define sequence awarness_first_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run Awarness_first_block always
+
+define inline_javascript awarness_responses_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run ""
+	___prepare__
+	//Jitter en fixation.
+	//Creo un valor aleatorio que condiciona la positividad o negatividad de otra variable aleatoria.
+	vars.random=Math.random()
+	
+	//Variable aleatoria que puede ser positiva o negativa.
+	if (vars.random>=0.5) {vars.jitter=Math.random()}
+	else {vars.jitter=(-Math.random())}
+	
+	//1000ms+-250: Puede aparecer entre esos valores. 
+	vars.random_duration= Math.round(1000 + (vars.jitter*250.00))
+	
+	//codificar tipo de ensayo.
+	if (vars.value==10){vars.type="high"}
+	else {vars.type='low'}
+	
+	//Recognition
+	vars.recognition='yes'
+	vars.pract='no'
+	vars.reward='no'
+	vars.noreward='yes'
+	__end__
+
+define loop awarness_second_block
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run awarness_second_trial
+
+define loop awarness_second_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 second_question 5
+	run awarness_second_sequence
+
+define sequence awarness_second_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run awarness_second_block always
+
+define sequence awarness_second_trial
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run new_reset_feedback_2 always
+	run second_question always
+	run second_question_response always
+	run confidence always
+	run confidence_response always
+	run logger always
+
+define sketchpad before_start
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Antes de comenzar, es necesario que te concentres y evites cualquier tipo de distracción,<br />dado que es importante controlar el ruido que puede producir el contexto en el que <br />cada persona realiza la tarea. Además, recuerda que en función de tu desempeño podrás <br />ganar dinero real. Cualquier tipo de distracción te afectará negativamente.<br />  <br />Por tanto, te pedimos que realices el experimento en un lugar con buena conexión <br />a internet, lo más aislado posible, e iluminación tenue. Además, por favor,  apague, <br />bloquee o mantenga fuera de su alcance el teléfono móvil durante la realización del <br />experimento.<br /><br /> <br />Si has seguido las indicaciones, pulsa la barra espaciadora." x=0 y=0 z_index=0
+
+define keyboard_response before_start_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define sketchpad blank
+	set duration 500
+	set description "Muestra estímulos"
+
+define sketchpad confidence
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="¿Cuanta seguridad tienes en la respuesta que acabas de dar?<br /><br /><br /><br /><br />Pulsa un número del 1 al 7 (1 = No estoy nada segura/o; 7 = Estoy absolutamente segura/o)." x=0 y=0 z_index=0
+
+define keyboard_response confidence_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses "1;2;3;4;5;6;7"
+
+define sketchpad consent
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Experimento 'VILOR'<br /><br />Investigadores: Francisco Garre Frutos y Juan Lupiañez.<br /><br /><br />Este experimento forma parte de un proyecto de investigación que tiene como base<br />estudiar procesos relativos a la orientación atencional. <br /><br />El experimento consta de una única sesión con una duración aproximada de 50 minutos que<br />se realiza de forma completamente online. <br /><br />La participación en este estudio no causará más prejuicios que los derivados de la<br />exposición prolongada a la pantalla del ordenador.<br /><br />En última instancia, además de poder obtener recompensas económicas, participar<br />en este proyecto supondrá apoyar al avance del conocimiento científico.<br /><br />Si has entendido todo lo anterior y estás de acuerdo con participar: <br /><br />Pulsa la letra k" x=0 y=0 z_index=0
+
+define keyboard_response consent_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses k
+
+define inline_javascript counter_value_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	//contador de puntos
+	if (((vars.correct_keyboard_response==1) && (vars.response_time_keyboard_response<=vars.cut_rt_above)) && (vars.response_time_keyboard_response>=100)) {vars.counter_value+=vars.value}
+	else {vars.counter_value-=vars.value}
+	
+	if (vars.response_time_keyboard_response<=vars.cut_rt_above){vars.slow_response=1}
+	else {vars.slow_response=0}
+	//Asegurar que el contador no sea negativo
+	if (vars.counter_value>=0) {vars.counter_value=vars.counter_value}
+	else {vars.counter_value=0}
+	
+	vars.response_time_keyboard_response=Math.round(vars.response_time_keyboard_response)
+	__end__
+	set _prepare ""
+
+define inline_javascript counterbalance_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run ""
+	___prepare__
+	//Inicialización de variables y contadores.
+	vars.random=0
+	vars.duration=0
+	vars.random_duration=0
+	vars.correct_count=0
+	vars.repeat=2
+	vars.trial_count_prac=0
+	vars.trial_count_prac2=0
+	vars.trial_count_rew=0
+	vars.trial_count_norew=0
+	vars.block_count=0
+	vars.trial_count=0
+	vars.block_count_norew=0
+	vars.bin
+	vars.p_response=0
+	vars.s_response=0
+	vars.awarness_first=0
+	vars.awarnes_second=0
+	vars.awarness_third=0
+	vars.hit=0
+	vars.false_alarm=0
+	vars.SD1=0
+	vars.SD2=0
+	vars.cut_rt=0
+	vars.sum_RT=0
+	vars.mean_RT=0
+	vars.RT=0
+	vars.arrayRT = []
+	vars.sumsqrt = 0
+	
+	//Para los puntos.
+	vars.green_value=0
+	vars.red_value=0
+	vars.counter_value=0
+	vars.type=0
+	vars.money=0
+	vars.money_final=0
+	vars.square_sum=0
+	//Contadores de valores. 
+	vars.high_count=0
+	
+	
+	//Contrabalanceo de color y valor.
+	if (vars.subject_parity === 'odd') {
+	    vars.red_value = 10.0
+	    vars.green_value = 1.0
+	} else {
+	   vars.red_value = 1.0
+	   vars.green_value = 10.0
+	}
+	
+	
+	//Contrabalanceo del color en el test de conciencia.
+	if (vars.red_value==10.0) {vars.high_color='rojo';vars.low_color='verde'}
+	else {vars.high_color='verde';vars.low_color='rojo'}
+	
+	//Codigo para guardar el número aleatorio que identifíca al participante
+	if (window.jatos) {
+	    vars.code=jatos.urlQueryParameters.code;
+	} else {
+	    vars.code = "No code";
+	}
+	__end__
+
+define sketchpad cue
+	set duration 50
+	set description "Muestra estímulos"
+	draw line color=grey penwidth=4 show_if=always x1=0 x2=0 y1=-15 y2=15 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=-15 x2=15 y1=0 y2=0 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=-316 y=-64 z_index=0
+	draw rect color=white fill=0 h=128 penwidth=8 show_if="[cue]==left" w=128 x=-316 y=-64 z_index=0
+	draw rect color=grey fill=0 h=-128 penwidth=3 show_if=always w=128 x=188 y=64 z_index=0
+	draw rect color=white fill=0 h=128 penwidth=8 show_if="[cue]==right" w=128 x=188 y=-64 z_index=0
+
+define feedback exit
+	set reset_variables yes
+	set duration 0
+	set description "Proporciona feedback al participante"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Has realizado todos los ensayos en los que podías ganar puntos.<br /><br />Has obtenido [counter_value] puntos en total. <br /><br />Por tanto, has ganado [money]€.<br /><br />¡Enhorabuena!<br /><br /><br />Pulsa la barra espaciadora para continuar." x=0 y=0 z_index=-1
+
+define keyboard_response exit_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define loop exp_no_rew_block_loop
+	set source_file ""
+	set source table
+	set repeat 8
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 32
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 SOA 50
+	setcycle 0 color red
+	setcycle 0 cue left
+	setcycle 0 letter Z
+	setcycle 0 targetpos -252
+	setcycle 0 cueing Cued
+	setcycle 0 correct_response Z
+	setcycle 0 value "[red_value]"
+	setcycle 1 SOA 950
+	setcycle 1 color red
+	setcycle 1 cue left
+	setcycle 1 letter Z
+	setcycle 1 targetpos -252
+	setcycle 1 cueing Cued
+	setcycle 1 correct_response Z
+	setcycle 1 value "[red_value]"
+	setcycle 2 SOA 50
+	setcycle 2 color green
+	setcycle 2 cue left
+	setcycle 2 letter Z
+	setcycle 2 targetpos -252
+	setcycle 2 cueing Cued
+	setcycle 2 correct_response Z
+	setcycle 2 value "[green_value]"
+	setcycle 3 SOA 950
+	setcycle 3 color green
+	setcycle 3 cue left
+	setcycle 3 letter Z
+	setcycle 3 targetpos -252
+	setcycle 3 cueing Cued
+	setcycle 3 correct_response Z
+	setcycle 3 value "[green_value]"
+	setcycle 4 SOA 50
+	setcycle 4 color red
+	setcycle 4 cue right
+	setcycle 4 letter Z
+	setcycle 4 targetpos -252
+	setcycle 4 cueing Uncued
+	setcycle 4 correct_response Z
+	setcycle 4 value "[red_value]"
+	setcycle 5 SOA 950
+	setcycle 5 color red
+	setcycle 5 cue right
+	setcycle 5 letter Z
+	setcycle 5 targetpos -252
+	setcycle 5 cueing Uncued
+	setcycle 5 correct_response Z
+	setcycle 5 value "[red_value]"
+	setcycle 6 SOA 50
+	setcycle 6 color green
+	setcycle 6 cue right
+	setcycle 6 letter Z
+	setcycle 6 targetpos -252
+	setcycle 6 cueing Uncued
+	setcycle 6 correct_response Z
+	setcycle 6 value "[green_value]"
+	setcycle 7 SOA 950
+	setcycle 7 color green
+	setcycle 7 cue right
+	setcycle 7 letter Z
+	setcycle 7 targetpos -252
+	setcycle 7 cueing Uncued
+	setcycle 7 correct_response Z
+	setcycle 7 value "[green_value]"
+	setcycle 8 SOA 50
+	setcycle 8 color red
+	setcycle 8 cue left
+	setcycle 8 letter M
+	setcycle 8 targetpos -252
+	setcycle 8 cueing Cued
+	setcycle 8 correct_response M
+	setcycle 8 value "[red_value]"
+	setcycle 9 SOA 950
+	setcycle 9 color red
+	setcycle 9 cue left
+	setcycle 9 letter M
+	setcycle 9 targetpos -252
+	setcycle 9 cueing Cued
+	setcycle 9 correct_response M
+	setcycle 9 value "[red_value]"
+	setcycle 10 SOA 50
+	setcycle 10 color green
+	setcycle 10 cue left
+	setcycle 10 letter M
+	setcycle 10 targetpos -252
+	setcycle 10 cueing Cued
+	setcycle 10 correct_response M
+	setcycle 10 value "[green_value]"
+	setcycle 11 SOA 950
+	setcycle 11 color green
+	setcycle 11 cue left
+	setcycle 11 letter M
+	setcycle 11 targetpos -252
+	setcycle 11 cueing Cued
+	setcycle 11 correct_response M
+	setcycle 11 value "[green_value]"
+	setcycle 12 SOA 50
+	setcycle 12 color red
+	setcycle 12 cue right
+	setcycle 12 letter M
+	setcycle 12 targetpos -252
+	setcycle 12 cueing Uncued
+	setcycle 12 correct_response M
+	setcycle 12 value "[red_value]"
+	setcycle 13 SOA 950
+	setcycle 13 color red
+	setcycle 13 cue right
+	setcycle 13 letter M
+	setcycle 13 targetpos -252
+	setcycle 13 cueing Uncued
+	setcycle 13 correct_response M
+	setcycle 13 value "[red_value]"
+	setcycle 14 SOA 50
+	setcycle 14 color green
+	setcycle 14 cue right
+	setcycle 14 letter M
+	setcycle 14 targetpos -252
+	setcycle 14 cueing Uncued
+	setcycle 14 correct_response M
+	setcycle 14 value "[green_value]"
+	setcycle 15 SOA 950
+	setcycle 15 color green
+	setcycle 15 cue right
+	setcycle 15 letter M
+	setcycle 15 targetpos -252
+	setcycle 15 cueing Uncued
+	setcycle 15 correct_response M
+	setcycle 15 value "[green_value]"
+	setcycle 16 SOA 50
+	setcycle 16 color red
+	setcycle 16 cue left
+	setcycle 16 letter Z
+	setcycle 16 targetpos 252
+	setcycle 16 cueing Uncued
+	setcycle 16 correct_response Z
+	setcycle 16 value "[red_value]"
+	setcycle 17 SOA 950
+	setcycle 17 color red
+	setcycle 17 cue left
+	setcycle 17 letter Z
+	setcycle 17 targetpos 252
+	setcycle 17 cueing Uncued
+	setcycle 17 correct_response Z
+	setcycle 17 value "[red_value]"
+	setcycle 18 SOA 50
+	setcycle 18 color green
+	setcycle 18 cue left
+	setcycle 18 letter Z
+	setcycle 18 targetpos 252
+	setcycle 18 cueing Uncued
+	setcycle 18 correct_response Z
+	setcycle 18 value "[green_value]"
+	setcycle 19 SOA 950
+	setcycle 19 color green
+	setcycle 19 cue left
+	setcycle 19 letter Z
+	setcycle 19 targetpos 252
+	setcycle 19 cueing Uncued
+	setcycle 19 correct_response Z
+	setcycle 19 value "[green_value]"
+	setcycle 20 SOA 50
+	setcycle 20 color red
+	setcycle 20 cue right
+	setcycle 20 letter Z
+	setcycle 20 targetpos 252
+	setcycle 20 cueing Cued
+	setcycle 20 correct_response Z
+	setcycle 20 value "[red_value]"
+	setcycle 21 SOA 950
+	setcycle 21 color red
+	setcycle 21 cue right
+	setcycle 21 letter Z
+	setcycle 21 targetpos 252
+	setcycle 21 cueing Cued
+	setcycle 21 correct_response Z
+	setcycle 21 value "[red_value]"
+	setcycle 22 SOA 50
+	setcycle 22 color green
+	setcycle 22 cue right
+	setcycle 22 letter Z
+	setcycle 22 targetpos 252
+	setcycle 22 cueing Cued
+	setcycle 22 correct_response Z
+	setcycle 22 value "[green_value]"
+	setcycle 23 SOA 950
+	setcycle 23 color green
+	setcycle 23 cue right
+	setcycle 23 letter Z
+	setcycle 23 targetpos 252
+	setcycle 23 cueing Cued
+	setcycle 23 correct_response Z
+	setcycle 23 value "[green_value]"
+	setcycle 24 SOA 50
+	setcycle 24 color red
+	setcycle 24 cue left
+	setcycle 24 letter M
+	setcycle 24 targetpos 252
+	setcycle 24 cueing Uncued
+	setcycle 24 correct_response M
+	setcycle 24 value "[red_value]"
+	setcycle 25 SOA 950
+	setcycle 25 color red
+	setcycle 25 cue left
+	setcycle 25 letter M
+	setcycle 25 targetpos 252
+	setcycle 25 cueing Uncued
+	setcycle 25 correct_response M
+	setcycle 25 value "[red_value]"
+	setcycle 26 SOA 50
+	setcycle 26 color green
+	setcycle 26 cue left
+	setcycle 26 letter M
+	setcycle 26 targetpos 252
+	setcycle 26 cueing Uncued
+	setcycle 26 correct_response M
+	setcycle 26 value "[green_value]"
+	setcycle 27 SOA 950
+	setcycle 27 color green
+	setcycle 27 cue left
+	setcycle 27 letter M
+	setcycle 27 targetpos 252
+	setcycle 27 cueing Uncued
+	setcycle 27 correct_response M
+	setcycle 27 value "[green_value]"
+	setcycle 28 SOA 50
+	setcycle 28 color red
+	setcycle 28 cue right
+	setcycle 28 letter M
+	setcycle 28 targetpos 252
+	setcycle 28 cueing Cued
+	setcycle 28 correct_response M
+	setcycle 28 value "[red_value]"
+	setcycle 29 SOA 950
+	setcycle 29 color red
+	setcycle 29 cue right
+	setcycle 29 letter M
+	setcycle 29 targetpos 252
+	setcycle 29 cueing Cued
+	setcycle 29 correct_response M
+	setcycle 29 value "[red_value]"
+	setcycle 30 SOA 50
+	setcycle 30 color green
+	setcycle 30 cue right
+	setcycle 30 letter M
+	setcycle 30 targetpos 252
+	setcycle 30 cueing Cued
+	setcycle 30 correct_response M
+	setcycle 30 value "[green_value]"
+	setcycle 31 SOA 950
+	setcycle 31 color green
+	setcycle 31 cue right
+	setcycle 31 letter M
+	setcycle 31 targetpos 252
+	setcycle 31 cueing Cued
+	setcycle 31 correct_response M
+	setcycle 31 value "[green_value]"
+	run exp_no_rew_trial_sequence
+
+define loop exp_no_rew_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run exp_no_rew_sequence
+
+define sequence exp_no_rew_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run exp_no_rew_block_loop always
+
+define sequence exp_no_rew_trial_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run trial_count_norew_inline always
+	run fixation always
+	run cue always
+	run SOA always
+	run target always
+	run targetresp always
+	run keyboard_response always
+	run inter_trial always
+	run Rest_norew "[trial_count_norew]%64==0 and [trial_count_norew]!=256"
+	run Rest_norew_response "[trial_count_norew]%64==0 and [trial_count_norew]!=256"
+	run priming_inline always
+	run logger always
+
+define loop exp_rew_block_loop
+	set source_file ""
+	set source table
+	set repeat 14
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 32
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 SOA 50
+	setcycle 0 color red
+	setcycle 0 cue left
+	setcycle 0 letter Z
+	setcycle 0 targetpos -252
+	setcycle 0 cueing Cued
+	setcycle 0 value "[red_value]"
+	setcycle 0 correct_response Z
+	setcycle 1 SOA 950
+	setcycle 1 color red
+	setcycle 1 cue left
+	setcycle 1 letter Z
+	setcycle 1 targetpos -252
+	setcycle 1 cueing Cued
+	setcycle 1 value "[red_value]"
+	setcycle 1 correct_response Z
+	setcycle 2 SOA 50
+	setcycle 2 color green
+	setcycle 2 cue left
+	setcycle 2 letter Z
+	setcycle 2 targetpos -252
+	setcycle 2 cueing Cued
+	setcycle 2 value "[green_value]"
+	setcycle 2 correct_response Z
+	setcycle 3 SOA 950
+	setcycle 3 color green
+	setcycle 3 cue left
+	setcycle 3 letter Z
+	setcycle 3 targetpos -252
+	setcycle 3 cueing Cued
+	setcycle 3 value "[green_value]"
+	setcycle 3 correct_response Z
+	setcycle 4 SOA 50
+	setcycle 4 color red
+	setcycle 4 cue right
+	setcycle 4 letter Z
+	setcycle 4 targetpos -252
+	setcycle 4 cueing Uncued
+	setcycle 4 value "[red_value]"
+	setcycle 4 correct_response Z
+	setcycle 5 SOA 950
+	setcycle 5 color red
+	setcycle 5 cue right
+	setcycle 5 letter Z
+	setcycle 5 targetpos -252
+	setcycle 5 cueing Uncued
+	setcycle 5 value "[red_value]"
+	setcycle 5 correct_response Z
+	setcycle 6 SOA 50
+	setcycle 6 color green
+	setcycle 6 cue right
+	setcycle 6 letter Z
+	setcycle 6 targetpos -252
+	setcycle 6 cueing Uncued
+	setcycle 6 value "[green_value]"
+	setcycle 6 correct_response Z
+	setcycle 7 SOA 950
+	setcycle 7 color green
+	setcycle 7 cue right
+	setcycle 7 letter Z
+	setcycle 7 targetpos -252
+	setcycle 7 cueing Uncued
+	setcycle 7 value "[green_value]"
+	setcycle 7 correct_response Z
+	setcycle 8 SOA 50
+	setcycle 8 color red
+	setcycle 8 cue left
+	setcycle 8 letter M
+	setcycle 8 targetpos -252
+	setcycle 8 cueing Cued
+	setcycle 8 value "[red_value]"
+	setcycle 8 correct_response M
+	setcycle 9 SOA 950
+	setcycle 9 color red
+	setcycle 9 cue left
+	setcycle 9 letter M
+	setcycle 9 targetpos -252
+	setcycle 9 cueing Cued
+	setcycle 9 value "[red_value]"
+	setcycle 9 correct_response M
+	setcycle 10 SOA 50
+	setcycle 10 color green
+	setcycle 10 cue left
+	setcycle 10 letter M
+	setcycle 10 targetpos -252
+	setcycle 10 cueing Cued
+	setcycle 10 value "[green_value]"
+	setcycle 10 correct_response M
+	setcycle 11 SOA 950
+	setcycle 11 color green
+	setcycle 11 cue left
+	setcycle 11 letter M
+	setcycle 11 targetpos -252
+	setcycle 11 cueing Cued
+	setcycle 11 value "[green_value]"
+	setcycle 11 correct_response M
+	setcycle 12 SOA 50
+	setcycle 12 color red
+	setcycle 12 cue right
+	setcycle 12 letter M
+	setcycle 12 targetpos -252
+	setcycle 12 cueing Uncued
+	setcycle 12 value "[red_value]"
+	setcycle 12 correct_response M
+	setcycle 13 SOA 950
+	setcycle 13 color red
+	setcycle 13 cue right
+	setcycle 13 letter M
+	setcycle 13 targetpos -252
+	setcycle 13 cueing Uncued
+	setcycle 13 value "[red_value]"
+	setcycle 13 correct_response M
+	setcycle 14 SOA 50
+	setcycle 14 color green
+	setcycle 14 cue right
+	setcycle 14 letter M
+	setcycle 14 targetpos -252
+	setcycle 14 cueing Uncued
+	setcycle 14 value "[green_value]"
+	setcycle 14 correct_response M
+	setcycle 15 SOA 950
+	setcycle 15 color green
+	setcycle 15 cue right
+	setcycle 15 letter M
+	setcycle 15 targetpos -252
+	setcycle 15 cueing Uncued
+	setcycle 15 value "[green_value]"
+	setcycle 15 correct_response M
+	setcycle 16 SOA 50
+	setcycle 16 color red
+	setcycle 16 cue left
+	setcycle 16 letter Z
+	setcycle 16 targetpos 252
+	setcycle 16 cueing Uncued
+	setcycle 16 value "[red_value]"
+	setcycle 16 correct_response Z
+	setcycle 17 SOA 950
+	setcycle 17 color red
+	setcycle 17 cue left
+	setcycle 17 letter Z
+	setcycle 17 targetpos 252
+	setcycle 17 cueing Uncued
+	setcycle 17 value "[red_value]"
+	setcycle 17 correct_response Z
+	setcycle 18 SOA 50
+	setcycle 18 color green
+	setcycle 18 cue left
+	setcycle 18 letter Z
+	setcycle 18 targetpos 252
+	setcycle 18 cueing Uncued
+	setcycle 18 value "[green_value]"
+	setcycle 18 correct_response Z
+	setcycle 19 SOA 950
+	setcycle 19 color green
+	setcycle 19 cue left
+	setcycle 19 letter Z
+	setcycle 19 targetpos 252
+	setcycle 19 cueing Uncued
+	setcycle 19 value "[green_value]"
+	setcycle 19 correct_response Z
+	setcycle 20 SOA 50
+	setcycle 20 color red
+	setcycle 20 cue right
+	setcycle 20 letter Z
+	setcycle 20 targetpos 252
+	setcycle 20 cueing Cued
+	setcycle 20 value "[red_value]"
+	setcycle 20 correct_response Z
+	setcycle 21 SOA 950
+	setcycle 21 color red
+	setcycle 21 cue right
+	setcycle 21 letter Z
+	setcycle 21 targetpos 252
+	setcycle 21 cueing Cued
+	setcycle 21 value "[red_value]"
+	setcycle 21 correct_response Z
+	setcycle 22 SOA 50
+	setcycle 22 color green
+	setcycle 22 cue right
+	setcycle 22 letter Z
+	setcycle 22 targetpos 252
+	setcycle 22 cueing Cued
+	setcycle 22 value "[green_value]"
+	setcycle 22 correct_response Z
+	setcycle 23 SOA 950
+	setcycle 23 color green
+	setcycle 23 cue right
+	setcycle 23 letter Z
+	setcycle 23 targetpos 252
+	setcycle 23 cueing Cued
+	setcycle 23 value "[green_value]"
+	setcycle 23 correct_response Z
+	setcycle 24 SOA 50
+	setcycle 24 color red
+	setcycle 24 cue left
+	setcycle 24 letter M
+	setcycle 24 targetpos 252
+	setcycle 24 cueing Uncued
+	setcycle 24 value "[red_value]"
+	setcycle 24 correct_response M
+	setcycle 25 SOA 950
+	setcycle 25 color red
+	setcycle 25 cue left
+	setcycle 25 letter M
+	setcycle 25 targetpos 252
+	setcycle 25 cueing Uncued
+	setcycle 25 value "[red_value]"
+	setcycle 25 correct_response M
+	setcycle 26 SOA 50
+	setcycle 26 color green
+	setcycle 26 cue left
+	setcycle 26 letter M
+	setcycle 26 targetpos 252
+	setcycle 26 cueing Uncued
+	setcycle 26 value "[green_value]"
+	setcycle 26 correct_response M
+	setcycle 27 SOA 950
+	setcycle 27 color green
+	setcycle 27 cue left
+	setcycle 27 letter M
+	setcycle 27 targetpos 252
+	setcycle 27 cueing Uncued
+	setcycle 27 value "[green_value]"
+	setcycle 27 correct_response M
+	setcycle 28 SOA 50
+	setcycle 28 color red
+	setcycle 28 cue right
+	setcycle 28 letter M
+	setcycle 28 targetpos 252
+	setcycle 28 cueing Cued
+	setcycle 28 value "[red_value]"
+	setcycle 28 correct_response M
+	setcycle 29 SOA 950
+	setcycle 29 color red
+	setcycle 29 cue right
+	setcycle 29 letter M
+	setcycle 29 targetpos 252
+	setcycle 29 cueing Cued
+	setcycle 29 value "[red_value]"
+	setcycle 29 correct_response M
+	setcycle 30 SOA 50
+	setcycle 30 color green
+	setcycle 30 cue right
+	setcycle 30 letter M
+	setcycle 30 targetpos 252
+	setcycle 30 cueing Cued
+	setcycle 30 value "[green_value]"
+	setcycle 30 correct_response M
+	setcycle 31 SOA 950
+	setcycle 31 color green
+	setcycle 31 cue right
+	setcycle 31 letter M
+	setcycle 31 targetpos 252
+	setcycle 31 cueing Cued
+	setcycle 31 value "[green_value]"
+	setcycle 31 correct_response M
+	run exp_rew_trial_sequence
+
+define loop exp_rew_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run exp_rew_sequence
+
+define sequence exp_rew_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run exp_rew_block_loop always
+
+define sequence exp_rew_trial_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run reset_reward_feedback always
+	run trial_count_rew_inline always
+	run fixation always
+	run cue always
+	run SOA always
+	run target always
+	run targetresp always
+	run keyboard_response always
+	run gains_feedback "[correct_keyboard_response]==1 and [response_time_keyboard_response]<=[cut_rt_above]"
+	run losses_feedback "[correct_keyboard_response]==0 or [response_time_keyboard_response]>[cut_rt_above]"
+	run counter_value_inline always
+	run Rest_rew "[trial_count_rew]%64==0 and [trial_count_rew]!=448"
+	run Rest_rew_response "[trial_count_rew]%64==0 and [trial_count_rew]!=448"
+	run money_inline always
+	run exit "[trial_count_rew]==448"
+	run exit_response "[trial_count_rew]==448"
+	run logger always
+
+define sequence experiment
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run counterbalance_inline always
+	run consent always
+	run consent_response always
+	run before_start always
+	run before_start_response always
+	run welcome always
+	run Instructions always
+	run instructions_response always
+	run practice_loop always
+	run blank always
+	run Pre_Cut always
+	run Pre_Cut_response always
+	run reset_feedback_2 always
+	run Cut_RT_Block always
+	run Rest_exp always
+	run blank always
+	run pre_questions always
+	run pre_questions_response always
+	run Awaraness_Block always
+	run blank always
+	run End always
+	run End_response always
+
+define sketchpad first_question
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="¿Crees saber de qué dependía la cantidad de puntos que ganabas?<br /><br /><br />Pulsa un número del 1 al 6 (1 = No lo sé en absoluto; 6 = Lo sé con total seguridad)." x=0 y=0 z_index=0
+
+define keyboard_response first_question_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set correct_response "4;5;6"
+	set allowed_responses "1;2;3;4;5;6"
+
+define sketchpad fixation
+	set duration "[random_duration]"
+	set description "Muestra estímulos"
+	draw line color=grey penwidth=4 show_if=always x1=0 x2=0 y1=-15 y2=15 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=-15 x2=15 y1=0 y2=0 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=-316 y=-64 z_index=0
+	draw rect color=grey fill=0 h=-128 penwidth=3 show_if=always w=128 x=188 y=64 z_index=0
+
+define feedback gains_feedback
+	set reset_variables no
+	set duration 750
+	set description "Proporciona feedback al participante"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=50 html=yes show_if=always text="+ [value]" x=0 y=0 z_index=0
+
+define keyboard_response instructions_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define sketchpad inter_trial
+	set duration 750
+	set description "Muestra estímulos"
+	draw line color=grey penwidth=4 show_if=always x1=0 x2=0 y1=-15 y2=15 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=-15 x2=15 y1=0 y2=0 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=-316 y=-64 z_index=0
+	draw rect color=grey fill=0 h=-128 penwidth=3 show_if=always w=128 x=188 y=64 z_index=0
+
+define keyboard_response keyboard_response
+	set timeout 1900
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set correct_response "[correct_response]"
+	set allowed_responses "z;m"
+
+define logger logger
+	set description "Registra datos experimentales"
+	set auto_log no
+	log correct_first_question_response
+	log correct_second_question_response
+	log counter_value
+	log trial_count_prac
+	log trial_count_rew
+	log trial_count_norew
+	log response_confidence_response
+	log pract
+	log reward
+	log noreward
+	log cueing
+	log color
+	log SOA
+	log cue
+	log targetpos
+	log random_duration
+	log subject_nr
+	log value
+	log type
+	log correct_keyboard_response
+	log response_time_keyboard_response
+	log previus
+	log letter
+	log correct_recognition_response
+	log response_first_question_response
+	log code
+	log response_recognition_response
+	log recognition
+	log cut_rt_below
+	log cut_rt_above
+	log sum_RT
+	log mean_RT
+	log SD
+	log money
+	log block_count
+	log trial_count_prac2
+	log trial_count
+	log slow_response
+
+define feedback losses_feedback
+	set reset_variables yes
+	set duration 750
+	set description "Proporciona feedback al participante"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=50 html=yes show_if=always text="- [value]" x=0 y=0 z_index=0
+
+define inline_javascript money_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	//Transformación puntos-dinero.
+	//Redondear a 2 decimales
+	function round(value, exp) {
+	  if (typeof exp === 'undefined' || +exp === 0)
+	    return Math.round(value);
+	
+	  value = +value;
+	  exp = +exp;
+	
+	  if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0))
+	    return NaN;
+	
+	  // Shift
+	  value = value.toString().split('e');
+	  value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp)));
+	
+	  // Shift back
+	  value = value.toString().split('e');
+	  return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
+	}
+	//Dinero
+	vars.money=round(vars.counter_value/246.4, 2)
+	
+	if ((vars.money>0) && (vars.money<=0.5)) {vars.money_final=0.5}
+	else if ((vars.money>0.5) && (vars.money<=1)) {vars.money_final=1}
+	else if ((vars.money>1) && (vars.money<=1.5)) {vars.money_final=1.5}
+	else if ((vars.money>1.5) && (vars.money<=2)) {vars.money_final=2}
+	else if ((vars.money>2) && (vars.money<=2.5)) {vars.money_final=2.5}
+	else if ((vars.money>2.5) && (vars.money<=3)) {vars.money_final=3}
+	else if ((vars.money>3) && (vars.money<=3.5)) {vars.money_final=3.5}
+	else if ((vars.money>3.5) && (vars.money<=4)) {vars.money_final=4}
+	else if ((vars.money>4) && (vars.money<=4.5)) {vars.money_final=4.5}
+	else if ((vars.money>4.5) && (vars.money<=5)) {vars.money_final=5}
+	else if ((vars.money>5) && (vars.money<=5.5)) {vars.money_final=5.5}
+	else if ((vars.money>5.5) && (vars.money<=6)) {vars.money_final=6}
+	else if ((vars.money>6) && (vars.money<=6.5)) {vars.money_final=6.5}
+	else if ((vars.money>6.5) && (vars.money<=7)) {vars.money_final=7}
+	else if ((vars.money>7) && (vars.money<=7.5)) {vars.money_final=7.5}
+	else if ((vars.money>7.5) && (vars.money<=8)) {vars.money_final=8}
+	else if ((vars.money>8) && (vars.money<=8.5)) {vars.money_final=8.5}
+	else if ((vars.money>8.5) && (vars.money<=9)) {vars.money_final=9}
+	else if ((vars.money>9) && (vars.money<=9.5)) {vars.money_final=9.5}
+	else if ((vars.money>9.5) && (vars.money<=11)) {vars.money_final=10}
+	else {vars.money_final=0}
+	
+	
+	//Priming:
+	if (vars.type=='high') {vars.high_count+=1}
+	else {vars.high_count=vars.high_count}
+	__end__
+	set _prepare ""
+
+define reset_feedback new_reset_feedback
+	set description "Resets the feedback variables, such as 'avg_rt' and 'acc'"
+
+define reset_feedback new_reset_feedback_1
+	set description "Resets the feedback variables, such as 'avg_rt' and 'acc'"
+
+define reset_feedback new_reset_feedback_2
+	set description "Resets the feedback variables, such as 'avg_rt' and 'acc'"
+
+define sketchpad post_cut
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="¡Lo estás haciendo muy bien!<br /><br />Ahora comienza el experimento de verdad. Te toca volver a realizar exactamente<br />la misma tarea, pero ahora en función de lo bien que lo hagas podrás ganar dinero.<br /><br />A lo largo del experimento tendrás la posibilidad de ganar o perder más o menos <br />puntos según el estímulo que aparezca en pantalla, si aciertas o fallas, y la <br />velocidad con la que respondas. Algunos estímulos te harán ganar muchos puntos, <br />pero si fallas o respondes demasiado lento perderás la misma cantidad. Por el <br />contrario, otros te permitirán obtener muy pocos puntos, pero también te harán <br />perder la misma cantidad. Por tanto, si quieres maximizar la ganancia de puntos <br />es recomendable que respondas de la forma más rápida y precisa que puedas.<br /><br />Dichos puntos serán transformados en dinero real, pudiendo ganar <br />hasta un máximo de 10€.<br /><br />Cuando quieras empezar pulsa la barra espaciadora." x=0 y=0 z_index=0
+
+define keyboard_response post_cut_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define loop practblock_loop
+	set source_file ""
+	set source table
+	set repeat 5
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 32
+	set continuous no
+	set break_if_on_first yes
+	set break_if "[repeat]==0"
+	setcycle 0 SOA 50
+	setcycle 0 color red
+	setcycle 0 correct_response Z
+	setcycle 0 cue left
+	setcycle 0 cueing Cued
+	setcycle 0 letter Z
+	setcycle 0 targetpos -252
+	setcycle 1 SOA 950
+	setcycle 1 color red
+	setcycle 1 correct_response Z
+	setcycle 1 cue left
+	setcycle 1 cueing Cued
+	setcycle 1 letter Z
+	setcycle 1 targetpos -252
+	setcycle 2 SOA 50
+	setcycle 2 color green
+	setcycle 2 correct_response Z
+	setcycle 2 cue left
+	setcycle 2 cueing Cued
+	setcycle 2 letter Z
+	setcycle 2 targetpos -252
+	setcycle 3 SOA 950
+	setcycle 3 color green
+	setcycle 3 correct_response Z
+	setcycle 3 cue left
+	setcycle 3 cueing Cued
+	setcycle 3 letter Z
+	setcycle 3 targetpos -252
+	setcycle 4 SOA 50
+	setcycle 4 color red
+	setcycle 4 correct_response Z
+	setcycle 4 cue right
+	setcycle 4 cueing Uncued
+	setcycle 4 letter Z
+	setcycle 4 targetpos -252
+	setcycle 5 SOA 950
+	setcycle 5 color red
+	setcycle 5 correct_response Z
+	setcycle 5 cue right
+	setcycle 5 cueing Uncued
+	setcycle 5 letter Z
+	setcycle 5 targetpos -252
+	setcycle 6 SOA 50
+	setcycle 6 color green
+	setcycle 6 correct_response Z
+	setcycle 6 cue right
+	setcycle 6 cueing Uncued
+	setcycle 6 letter Z
+	setcycle 6 targetpos -252
+	setcycle 7 SOA 950
+	setcycle 7 color green
+	setcycle 7 correct_response Z
+	setcycle 7 cue right
+	setcycle 7 cueing Uncued
+	setcycle 7 letter Z
+	setcycle 7 targetpos -252
+	setcycle 8 SOA 50
+	setcycle 8 color red
+	setcycle 8 correct_response M
+	setcycle 8 cue left
+	setcycle 8 cueing Cued
+	setcycle 8 letter M
+	setcycle 8 targetpos -252
+	setcycle 9 SOA 950
+	setcycle 9 color red
+	setcycle 9 correct_response M
+	setcycle 9 cue left
+	setcycle 9 cueing Cued
+	setcycle 9 letter M
+	setcycle 9 targetpos -252
+	setcycle 10 SOA 50
+	setcycle 10 color green
+	setcycle 10 correct_response M
+	setcycle 10 cue left
+	setcycle 10 cueing Cued
+	setcycle 10 letter M
+	setcycle 10 targetpos -252
+	setcycle 11 SOA 950
+	setcycle 11 color green
+	setcycle 11 correct_response M
+	setcycle 11 cue left
+	setcycle 11 cueing Cued
+	setcycle 11 letter M
+	setcycle 11 targetpos -252
+	setcycle 12 SOA 50
+	setcycle 12 color red
+	setcycle 12 correct_response M
+	setcycle 12 cue right
+	setcycle 12 cueing Uncued
+	setcycle 12 letter M
+	setcycle 12 targetpos -252
+	setcycle 13 SOA 950
+	setcycle 13 color red
+	setcycle 13 correct_response M
+	setcycle 13 cue right
+	setcycle 13 cueing Uncued
+	setcycle 13 letter M
+	setcycle 13 targetpos -252
+	setcycle 14 SOA 50
+	setcycle 14 color green
+	setcycle 14 correct_response M
+	setcycle 14 cue right
+	setcycle 14 cueing Uncued
+	setcycle 14 letter M
+	setcycle 14 targetpos -252
+	setcycle 15 SOA 950
+	setcycle 15 color green
+	setcycle 15 correct_response M
+	setcycle 15 cue right
+	setcycle 15 cueing Uncued
+	setcycle 15 letter M
+	setcycle 15 targetpos -252
+	setcycle 16 SOA 50
+	setcycle 16 color red
+	setcycle 16 correct_response Z
+	setcycle 16 cue left
+	setcycle 16 cueing Uncued
+	setcycle 16 letter Z
+	setcycle 16 targetpos 252
+	setcycle 17 SOA 950
+	setcycle 17 color red
+	setcycle 17 correct_response Z
+	setcycle 17 cue left
+	setcycle 17 cueing Uncued
+	setcycle 17 letter Z
+	setcycle 17 targetpos 252
+	setcycle 18 SOA 50
+	setcycle 18 color green
+	setcycle 18 correct_response Z
+	setcycle 18 cue left
+	setcycle 18 cueing Uncued
+	setcycle 18 letter Z
+	setcycle 18 targetpos 252
+	setcycle 19 SOA 950
+	setcycle 19 color green
+	setcycle 19 correct_response Z
+	setcycle 19 cue left
+	setcycle 19 cueing Uncued
+	setcycle 19 letter Z
+	setcycle 19 targetpos 252
+	setcycle 20 SOA 50
+	setcycle 20 color red
+	setcycle 20 correct_response Z
+	setcycle 20 cue right
+	setcycle 20 cueing Cued
+	setcycle 20 letter Z
+	setcycle 20 targetpos 252
+	setcycle 21 SOA 950
+	setcycle 21 color red
+	setcycle 21 correct_response Z
+	setcycle 21 cue right
+	setcycle 21 cueing Cued
+	setcycle 21 letter Z
+	setcycle 21 targetpos 252
+	setcycle 22 SOA 50
+	setcycle 22 color green
+	setcycle 22 correct_response Z
+	setcycle 22 cue right
+	setcycle 22 cueing Cued
+	setcycle 22 letter Z
+	setcycle 22 targetpos 252
+	setcycle 23 SOA 950
+	setcycle 23 color green
+	setcycle 23 correct_response Z
+	setcycle 23 cue right
+	setcycle 23 cueing Cued
+	setcycle 23 letter Z
+	setcycle 23 targetpos 252
+	setcycle 24 SOA 50
+	setcycle 24 color red
+	setcycle 24 correct_response M
+	setcycle 24 cue left
+	setcycle 24 cueing Uncued
+	setcycle 24 letter M
+	setcycle 24 targetpos 252
+	setcycle 25 SOA 950
+	setcycle 25 color red
+	setcycle 25 correct_response M
+	setcycle 25 cue left
+	setcycle 25 cueing Uncued
+	setcycle 25 letter M
+	setcycle 25 targetpos 252
+	setcycle 26 SOA 50
+	setcycle 26 color green
+	setcycle 26 correct_response M
+	setcycle 26 cue left
+	setcycle 26 cueing Uncued
+	setcycle 26 letter M
+	setcycle 26 targetpos 252
+	setcycle 27 SOA 950
+	setcycle 27 color green
+	setcycle 27 correct_response M
+	setcycle 27 cue left
+	setcycle 27 cueing Uncued
+	setcycle 27 letter M
+	setcycle 27 targetpos 252
+	setcycle 28 SOA 50
+	setcycle 28 color red
+	setcycle 28 correct_response M
+	setcycle 28 cue right
+	setcycle 28 cueing Cued
+	setcycle 28 letter M
+	setcycle 28 targetpos 252
+	setcycle 29 SOA 950
+	setcycle 29 color red
+	setcycle 29 correct_response M
+	setcycle 29 cue right
+	setcycle 29 cueing Cued
+	setcycle 29 letter M
+	setcycle 29 targetpos 252
+	setcycle 30 SOA 50
+	setcycle 30 color green
+	setcycle 30 correct_response M
+	setcycle 30 cue right
+	setcycle 30 cueing Cued
+	setcycle 30 letter M
+	setcycle 30 targetpos 252
+	setcycle 31 SOA 950
+	setcycle 31 color green
+	setcycle 31 correct_response M
+	setcycle 31 cue right
+	setcycle 31 cueing Cued
+	setcycle 31 letter M
+	setcycle 31 targetpos 252
+	run trial_sequence
+
+define sequence practblock_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run practblock_loop always
+
+define loop practice_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order sequential
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run practblock_sequence
+
+define sketchpad pre_exp
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Antes de empezar, recuerda las instrucciones:<br /><br /><br />Si aparece la letra Z, pulsa la tecla z.<br />Si aparece la letra M, pulsa la tecla m.<br /><br /><br />Si te sientes preparada/o pulsa la barra espaciadora para empezar." x=0 y=0 z_index=0
+
+define keyboard_response pre_exp_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define keyboard_response pre_no_rew_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define sketchpad pre_questions
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Ya has terminado la fase experimental.<br /><br />Antes de acabar, vamos a realizarte algunas pruebas de control sobre <br />el experimento que acabas de realizar.<br /> <br /><br />Pulsa la barra espaciadora para empezar con las preguntas." x=0 y=0 z_index=0
+
+define keyboard_response pre_questions_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define sketchpad pre_recognition
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Ahora, vamos a presentarte diferentes secuencias experimentales que ya has visto con anterioridad.<br /><br />Tu tarea consiste en estimar la cantidad de puntos que crees que hubieses ganando/perdido<br />al final de cada una de ellas. <br /><br />Para empezar, pulsa la barra espaciadora. " x=0 y=0 z_index=0
+
+define keyboard_response pre_recognition_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define sketchpad pre_second
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Por último, vamos a preguntarte explícitamente si sabes<br /> de qué dependía la cantidad de puntos que ganas. <br /><br /><br />Pulsa la barra espaciadora para empezar. " x=0 y=0 z_index=0
+
+define keyboard_response pre_second_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses space
+
+define inline_javascript priming_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	vars.response_time_keyboard_response=Math.round(vars.response_time_keyboard_response)
+	//Priming high:
+	if (vars.value==10) {vars.high_count+=1}
+	else (vars.high_count=0)
+	__end__
+	set _prepare ""
+
+define sketchpad recognition
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="¿Cuantos puntos crees que ganarías? <br /><br /><br />Pulsa d si crees que 10.<br /><br />Pulsa k si crees que 1." x=0 y=0 z_index=0
+
+define loop recognition_block
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 32
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 SOA 50
+	setcycle 0 color red
+	setcycle 0 cue left
+	setcycle 0 letter Z
+	setcycle 0 targetpos -252
+	setcycle 0 cueing Cued
+	setcycle 0 value "[red_value]"
+	setcycle 1 SOA 950
+	setcycle 1 color red
+	setcycle 1 cue left
+	setcycle 1 letter Z
+	setcycle 1 targetpos -252
+	setcycle 1 cueing Cued
+	setcycle 1 value "[red_value]"
+	setcycle 2 SOA 50
+	setcycle 2 color green
+	setcycle 2 cue left
+	setcycle 2 letter Z
+	setcycle 2 targetpos -252
+	setcycle 2 cueing Cued
+	setcycle 2 value "[green_value]"
+	setcycle 3 SOA 950
+	setcycle 3 color green
+	setcycle 3 cue left
+	setcycle 3 letter Z
+	setcycle 3 targetpos -252
+	setcycle 3 cueing Cued
+	setcycle 3 value "[green_value]"
+	setcycle 4 SOA 50
+	setcycle 4 color red
+	setcycle 4 cue right
+	setcycle 4 letter Z
+	setcycle 4 targetpos -252
+	setcycle 4 cueing Uncued
+	setcycle 4 value "[red_value]"
+	setcycle 5 SOA 950
+	setcycle 5 color red
+	setcycle 5 cue right
+	setcycle 5 letter Z
+	setcycle 5 targetpos -252
+	setcycle 5 cueing Uncued
+	setcycle 5 value "[red_value]"
+	setcycle 6 SOA 50
+	setcycle 6 color green
+	setcycle 6 cue right
+	setcycle 6 letter Z
+	setcycle 6 targetpos -252
+	setcycle 6 cueing Uncued
+	setcycle 6 value "[green_value]"
+	setcycle 7 SOA 950
+	setcycle 7 color green
+	setcycle 7 cue right
+	setcycle 7 letter Z
+	setcycle 7 targetpos -252
+	setcycle 7 cueing Uncued
+	setcycle 7 value "[green_value]"
+	setcycle 8 SOA 50
+	setcycle 8 color red
+	setcycle 8 cue left
+	setcycle 8 letter M
+	setcycle 8 targetpos -252
+	setcycle 8 cueing Cued
+	setcycle 8 value "[red_value]"
+	setcycle 9 SOA 950
+	setcycle 9 color red
+	setcycle 9 cue left
+	setcycle 9 letter M
+	setcycle 9 targetpos -252
+	setcycle 9 cueing Cued
+	setcycle 9 value "[red_value]"
+	setcycle 10 SOA 50
+	setcycle 10 color green
+	setcycle 10 cue left
+	setcycle 10 letter M
+	setcycle 10 targetpos -252
+	setcycle 10 cueing Cued
+	setcycle 10 value "[green_value]"
+	setcycle 11 SOA 950
+	setcycle 11 color green
+	setcycle 11 cue left
+	setcycle 11 letter M
+	setcycle 11 targetpos -252
+	setcycle 11 cueing Cued
+	setcycle 11 value "[green_value]"
+	setcycle 12 SOA 50
+	setcycle 12 color red
+	setcycle 12 cue right
+	setcycle 12 letter M
+	setcycle 12 targetpos -252
+	setcycle 12 cueing Uncued
+	setcycle 12 value "[red_value]"
+	setcycle 13 SOA 950
+	setcycle 13 color red
+	setcycle 13 cue right
+	setcycle 13 letter M
+	setcycle 13 targetpos -252
+	setcycle 13 cueing Uncued
+	setcycle 13 value "[red_value]"
+	setcycle 14 SOA 50
+	setcycle 14 color green
+	setcycle 14 cue right
+	setcycle 14 letter M
+	setcycle 14 targetpos -252
+	setcycle 14 cueing Uncued
+	setcycle 14 value "[green_value]"
+	setcycle 15 SOA 950
+	setcycle 15 color green
+	setcycle 15 cue right
+	setcycle 15 letter M
+	setcycle 15 targetpos -252
+	setcycle 15 cueing Uncued
+	setcycle 15 value "[green_value]"
+	setcycle 16 SOA 50
+	setcycle 16 color red
+	setcycle 16 cue left
+	setcycle 16 letter Z
+	setcycle 16 targetpos 252
+	setcycle 16 cueing Uncued
+	setcycle 16 value "[red_value]"
+	setcycle 17 SOA 950
+	setcycle 17 color red
+	setcycle 17 cue left
+	setcycle 17 letter Z
+	setcycle 17 targetpos 252
+	setcycle 17 cueing Uncued
+	setcycle 17 value "[red_value]"
+	setcycle 18 SOA 50
+	setcycle 18 color green
+	setcycle 18 cue left
+	setcycle 18 letter Z
+	setcycle 18 targetpos 252
+	setcycle 18 cueing Uncued
+	setcycle 18 value "[green_value]"
+	setcycle 19 SOA 950
+	setcycle 19 color green
+	setcycle 19 cue left
+	setcycle 19 letter Z
+	setcycle 19 targetpos 252
+	setcycle 19 cueing Uncued
+	setcycle 19 value "[green_value]"
+	setcycle 20 SOA 50
+	setcycle 20 color red
+	setcycle 20 cue right
+	setcycle 20 letter Z
+	setcycle 20 targetpos 252
+	setcycle 20 cueing Cued
+	setcycle 20 value "[red_value]"
+	setcycle 21 SOA 950
+	setcycle 21 color red
+	setcycle 21 cue right
+	setcycle 21 letter Z
+	setcycle 21 targetpos 252
+	setcycle 21 cueing Cued
+	setcycle 21 value "[red_value]"
+	setcycle 22 SOA 50
+	setcycle 22 color green
+	setcycle 22 cue right
+	setcycle 22 letter Z
+	setcycle 22 targetpos 252
+	setcycle 22 cueing Cued
+	setcycle 22 value "[green_value]"
+	setcycle 23 SOA 950
+	setcycle 23 color green
+	setcycle 23 cue right
+	setcycle 23 letter Z
+	setcycle 23 targetpos 252
+	setcycle 23 cueing Cued
+	setcycle 23 value "[green_value]"
+	setcycle 24 SOA 50
+	setcycle 24 color red
+	setcycle 24 cue left
+	setcycle 24 letter M
+	setcycle 24 targetpos 252
+	setcycle 24 cueing Uncued
+	setcycle 24 value "[red_value]"
+	setcycle 25 SOA 950
+	setcycle 25 color red
+	setcycle 25 cue left
+	setcycle 25 letter M
+	setcycle 25 targetpos 252
+	setcycle 25 cueing Uncued
+	setcycle 25 value "[red_value]"
+	setcycle 26 SOA 50
+	setcycle 26 color green
+	setcycle 26 cue left
+	setcycle 26 letter M
+	setcycle 26 targetpos 252
+	setcycle 26 cueing Uncued
+	setcycle 26 value "[green_value]"
+	setcycle 27 SOA 950
+	setcycle 27 color green
+	setcycle 27 cue left
+	setcycle 27 letter M
+	setcycle 27 targetpos 252
+	setcycle 27 cueing Uncued
+	setcycle 27 value "[green_value]"
+	setcycle 28 SOA 50
+	setcycle 28 color red
+	setcycle 28 cue right
+	setcycle 28 letter M
+	setcycle 28 targetpos 252
+	setcycle 28 cueing Cued
+	setcycle 28 value "[red_value]"
+	setcycle 29 SOA 950
+	setcycle 29 color red
+	setcycle 29 cue right
+	setcycle 29 letter M
+	setcycle 29 targetpos 252
+	setcycle 29 cueing Cued
+	setcycle 29 value "[red_value]"
+	setcycle 30 SOA 50
+	setcycle 30 color green
+	setcycle 30 cue right
+	setcycle 30 letter M
+	setcycle 30 targetpos 252
+	setcycle 30 cueing Cued
+	setcycle 30 value "[green_value]"
+	setcycle 31 SOA 950
+	setcycle 31 color green
+	setcycle 31 cue right
+	setcycle 31 letter M
+	setcycle 31 targetpos 252
+	setcycle 31 cueing Cued
+	setcycle 31 value "[green_value]"
+	run recognition_trials
+
+define loop recognition_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Corre otro objeto de forma repetida"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run recognition_sequence
+
+define keyboard_response recognition_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set allowed_responses "d;k"
+
+define sequence recognition_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run recognition_block always
+
+define sequence recognition_trials
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run awarness_responses_inline always
+	run new_reset_feedback always
+	run fixation always
+	run cue always
+	run SOA always
+	run target_1 always
+	run recognition always
+	run recognition_response always
+	run Response_inline always
+	run logger always
+
+define inline_javascript repeat_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	if ((vars.correct_keyboard_response==1) && (vars.response_time_keyboard_response<=1200)) {vars.correct_count+=1} else {vars.correct_count=vars.correct_count}
+	
+	if ((vars.correct_count>=15) && (vars.trial_count_prac%20==0))
+	{vars.repeat=0}
+	else if ((vars.correct_count<15) && (vars.trial_count_prac%20==0))
+	{vars.repeat=1}
+	else {vars.repeat=2}
+	
+	vars.response_time_keyboard_response=Math.round(vars.response_time_keyboard_response)
+	__end__
+	set _prepare ""
+
+define reset_feedback reset_feedback
+	set description "Resets the feedback variables, such as 'avg_rt' and 'acc'"
+
+define reset_feedback reset_feedback_2
+	set description "Resets the feedback variables, such as 'avg_rt' and 'acc'"
+
+define reset_feedback reset_reward_feedback
+	set description "Resets the feedback variables, such as 'avg_rt' and 'acc'"
+
+define sketchpad second_question
+	set duration 0
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=24 html=yes show_if=always text="¿De qué dependía la cantidad de puntos que ganabas?<br /><br /><br />Pulsa 1 si crees que la letra Z en [high_color] llevaba a más puntos.<br /><br />Pulsa 2 si crees que la letra Z en [low_color] llevaba a más puntos.<br /><br />Pulsa 3 si crees que la letra M en [high_color] llevaba a más puntos.<br /><br />Pulsa 4 si crees que la letra M en [low_color] llevaba a más puntos.<br /><br />Pulsa 5 si crees que el color [high_color], sin importar la letra, llevaba a más puntos.<br /><br />Pulsa 6 si crees que el color [low_color], sin importar la letra, llevaba a más puntos.<br /><br />Pulsa 7 si crees que la letra Z, sin importar el color, llevaba a más puntos. <br /><br />Pulsa 8 si la letra M, sin importar el color, llevaba a más puntos<br /><br />Pulsa 9 si crees que la cantidad de puntos que ganabas era aleatoria.<br /><br />" x=0 y=0 z_index=0
+
+define keyboard_response second_question_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Recoge respuestas de teclado"
+	set correct_response "[second_question]"
+	set allowed_responses "1;2;3;4;5;6;7;8;9"
+
+define sketchpad target
+	set duration 100
+	set description "Muestra estímulos"
+	draw textline center=1 color="[color]" font_bold=no font_family=mono font_italic=no font_size=60 html=yes show_if=always text="[letter]" x="[targetpos]" y=0 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=0 x2=0 y1=-15 y2=15 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=-15 x2=15 y1=0 y2=0 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=-316 y=-64 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=188 y=-64 z_index=0
+
+define sketchpad target_1
+	set duration 750
+	set description "Muestra estímulos"
+	draw textline center=1 color="[color]" font_bold=no font_family=mono font_italic=no font_size=60 html=yes show_if=always text="[letter]" x="[targetpos]" y=0 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=0 x2=0 y1=-15 y2=15 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=-15 x2=15 y1=0 y2=0 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=-316 y=-64 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=188 y=-64 z_index=0
+
+define sketchpad targetresp
+	set duration 0
+	set description "Muestra estímulos"
+	draw line color=grey penwidth=4 show_if=always x1=0 x2=0 y1=-15 y2=15 z_index=0
+	draw line color=grey penwidth=4 show_if=always x1=-15 x2=15 y1=0 y2=0 z_index=0
+	draw rect color=grey fill=0 h=128 penwidth=3 show_if=always w=128 x=-316 y=-64 z_index=0
+	draw rect color=grey fill=0 h=-128 penwidth=3 show_if=always w=128 x=188 y=64 z_index=0
+
+define inline_javascript trial_count
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run ""
+	___prepare__
+	//Contador de ensayos
+	vars.trial_count_prac2+=1
+	vars.trial_count+=1
+	vars.block_count=1
+	
+	//Para filtrar los datos de esta fase
+	vars.pract='yes'
+	vars.reward='no'
+	vars.noreward='no'
+	vars.recognition='no'
+	vars.cut_rt='yes'
+	
+	//Jitter en fixation.
+	//Creo un valor aleatorio que condiciona la positividad o negatividad de otra variable aleatoria.
+	vars.random=Math.random()
+	
+	//Variable aleatoria que puede ser positiva o negativa.
+	if (vars.random>=0.5) {vars.jitter=Math.random()}
+	else {vars.jitter=(-Math.random())}
+	
+	//1000ms+-250: Puede aparecer entre esos valores. 
+	vars.random_duration= Math.round(1000 + (vars.jitter*250.00))
+	__end__
+
+define inline_javascript trial_count_norew_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	//codificar tipo de ensayo.
+	if (vars.value==10){vars.type="high"}
+	else {vars.type='low'}
+	
+	
+	//Qué coño está mal
+	if ((vars.high_count==1) && (vars.type=='high'))
+	{vars.present_vs_previus='High_High';vars.high_count=0}
+	else if ((vars.high_count==1) && (vars.type=='low'))
+	{vars.present_vs_previus='High_Low';vars.high_count=0}
+	else if ((vars.high_count==0) && (vars.type=='high'))
+	{vars.present_vs_previus='Low_High';vars.high_count=0}
+	else if ((vars.high_count==0) && (vars.type=='low'))
+	{vars.present_vs_previus='Low_Low';vars.high_count=0}
+	
+	if ((vars.trial_count_norew==1) || (vars.trial_count_norew%65==0))
+	{vars.present_vs_previus= 'no'} 
+	else if ((vars.trial_count_norew!=1) || (vars.trial_count_norew%65!=0)){vars.present_vs_previus=vars.present_vs_previus}
+	
+	//Ensayo previo
+	if ((vars.present_vs_previus== "High_Low") || (vars.present_vs_previus== "High_High"))
+	{vars.previus='Antes High'}
+	else if ((vars.present_vs_previus== "Low_Low") || (vars.present_vs_previus== "Low_High")) {vars.previus='Antes Low'}
+	else {vars.previus= 'no'}
+	__end__
+	___prepare__
+	//Contador de ensayos. 
+	vars.trial_count_norew=vars.trial_count_norew+1
+	vars.trial_count+=1
+	
+	//Filtrar datos de prácticas.
+	vars.pract='no'
+	vars.reward='no'
+	vars.noreward='yes'
+	vars.recognition='no'
+	
+	//Contador de bloques.
+	if ((vars.trial_count_norew%65==0) || (vars.trial_count_norew==1)){vars.block_count=vars.block_count+1}
+	else {vars.block_count=vars.block_count}
+	
+	//codificar tipo de ensayo.
+	if ((vars.red_value==10) || (vars.green_value==10))
+	{vars.type_rew="high"}
+	else {vars.type_rew='low'}
+	
+	//Jitter en fixation.
+	//Creo un valor aleatorio que condiciona la positividad o negatividad de otra variable aleatoria.
+	vars.random=Math.random()
+	
+	//Variable aleatoria que puede ser positiva o negativa.
+	if (vars.random>=0.5) {vars.jitter=Math.random()}
+	else {vars.jitter=(-Math.random())}
+	
+	//1000ms+-250: Puede aparecer entre esos valores. 
+	vars.random_duration= Math.round(1000 + (vars.jitter*250.00))
+	__end__
+
+define inline_javascript trial_count_prac_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run ""
+	___prepare__
+	//Contador de ensayos
+	vars.trial_count_prac+=1
+	vars.trial_count+=1
+	
+	//Para filtrar los datos de esta fase
+	vars.pract='yes'
+	vars.reward='no'
+	vars.noreward='no'
+	vars.recognition='no'
+	vars.cut_rt='no'
+	//Resetear correct_count
+	if (vars.trial_count_prac%21==0) {vars.correct_count=0}
+	else {vars.correct_count=vars.correct_count}
+	
+	//Jitter en fixation.
+	//Creo un valor aleatorio que condiciona la positividad o negatividad de otra variable aleatoria.
+	vars.random=Math.random()
+	
+	//Variable aleatoria que puede ser positiva o negativa.
+	if (vars.random>=0.5) {vars.jitter=Math.random()}
+	else {vars.jitter=(-Math.random())}
+	
+	//1000ms+-250: Puede aparecer entre esos valores. 
+	vars.random_duration= Math.round(1000 + (vars.jitter*250.00))
+	__end__
+
+define inline_javascript trial_count_rew_inline
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	//codificar tipo de ensayo.
+	if (vars.value==10){vars.type="high"}
+	else {vars.type='low'}
+	
+	//Qué coño está mal
+	if ((vars.high_count==1) && (vars.type=='high'))
+	{vars.present_vs_previus='High_High';vars.high_count=0}
+	else if ((vars.high_count==1) && (vars.type=='low'))
+	{vars.present_vs_previus='High_Low';vars.high_count=0}
+	else if ((vars.high_count==0) && (vars.type=='high'))
+	{vars.present_vs_previus='Low_High';vars.high_count=0}
+	else if ((vars.high_count==0) && (vars.type=='low'))
+	{vars.present_vs_previus='Low_Low';vars.high_count=0}
+	
+	if ((vars.trial_count_rew==1) || (vars.trial_count_rew%65==0))
+	{vars.present_vs_previus= 'no'} 
+	else {vars.present_vs_previus=vars.present_vs_previus}
+	
+	//Ensayo previo
+	if ((vars.present_vs_previus== "High_Low") || (vars.present_vs_previus== "High_High"))
+	{vars.previus='Antes High'}
+	else if ((vars.present_vs_previus== "Low_Low") || (vars.present_vs_previus== "Low_High")) {vars.previus='Antes Low'}
+	else {vars.previus= 'no'}
+	__end__
+	___prepare__
+	//Contador de ensayos. 
+	vars.trial_count_rew=vars.trial_count_rew+1
+	vars.trial_count+=1
+	
+	//Filtrar datos de prácticas.
+	vars.pract='no'
+	vars.reward='yes'
+	vars.noreward='no'
+	vars.recognition='no'
+	vars.cut_rt='no'
+	
+	//Contador de bloques.
+	if ((vars.trial_count_rew%65==0) || (vars.trial_count_rew==1)){vars.block_count+=1}
+	else {vars.block_count=vars.block_count}
+	
+	//Jitter en fixation.
+	//Creo un valor aleatorio que condiciona la positividad o negatividad de otra variable aleatoria.
+	vars.random=Math.random()
+	
+	//Variable aleatoria que puede ser positiva o negativa.
+	if (vars.random>=0.5) {vars.jitter=Math.random()}
+	else {vars.jitter=(-Math.random())}
+	
+	//1000ms+-250: Puede aparecer entre esos valores. 
+	vars.random_duration= Math.round(1000 + (vars.jitter*250)) 
+	__end__
+
+define sequence trial_sequence
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run reset_feedback always
+	run trial_count_prac_inline always
+	run fixation always
+	run cue always
+	run SOA always
+	run target always
+	run targetresp always
+	run keyboard_response always
+	run repeat_inline always
+	run Prac_response_feedback always
+	run RT_feedback "[response_time_keyboard_response]>1200 or [response_time_keyboard_response]<200"
+	run Repeat "[repeat]==1"
+	run Repeat_response "[repeat]==1"
+	run logger always
+
+define sketchpad welcome
+	set start_response_interval no
+	set reset_variables no
+	set duration keypress
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=no font_family=serif font_italic=no font_size=32 html=yes show_if=always text="¡Bienvenido/a al experimento!" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=serif font_italic=no font_size=32 html=yes show_if=always text="[Pulse cualquier tecla para continuar]" x=0 y=160 z_index=0
+

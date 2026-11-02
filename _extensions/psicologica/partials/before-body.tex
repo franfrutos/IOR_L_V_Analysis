@@ -1,0 +1,28 @@
+$if(linenumbers)$
+\linenumbers
+$endif$
+$if(doublespacing)$
+\doublespacing
+$endif$
+$if(title)$
+\maketitle
+
+$endif$
+$if(corresponding-note)$
+\makeatletter
+\ifdefvoid{\@corrauthor}{}{%
+  \begingroup
+  \renewcommand{\thefootnote}{}%
+  \footnotetext{\emph{\@corrauthorname:} \@corrauthor}%
+  \endgroup}
+\makeatother
+$endif$
+$if(abstract)$
+\begin{abstract}
+$abstract$
+
+$if(keywords)$
+\keywords{$for(keywords)$$keywords$$sep$, $endfor$}
+$endif$
+\end{abstract}
+$endif$

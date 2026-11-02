@@ -1,0 +1,50 @@
+title: Psicológica manuscript
+author: Francisco Garre-Frutos
+version: 1.0.0
+quarto-required: ">=1.4.0"
+contributes:
+  formats:
+    common:
+      csl: apa.csl
+      citeproc: false
+      link-citations: true
+      number-sections: false
+      # Psicológica options (see README)
+      linenumbers: true
+      doublespacing: true
+      corresponding-note: true
+      # Revised text ([text]{.rev}) in blue; false for the clean version
+      revision-marks: true
+      execute:
+        echo: false
+        warning: false
+        message: false
+      filters:
+        - at: pre-ast
+          path: psicologica-options.lua
+        - psicologica-revision.lua
+        # Citeproc runs inside this filter (citeproc: false above)
+        - at: post-render
+          path: psicologica-citations.lua
+        - at: post-render
+          path: psicologica.lua
+    pdf:
+      pdf-engine: pdflatex
+      keep-tex: true
+      indent: true
+      colorlinks: true
+      linkcolor: PANDarkBlue
+      citecolor: PANDarkBlue
+      urlcolor: PANDarkBlue
+      filecolor: PANDarkBlue
+      template-partials:
+        - partials/doc-class.tex
+        - partials/fonts.latex
+        - partials/before-title.tex
+        - partials/title.tex
+        - partials/before-body.tex
+      format-resources:
+        - psicologica_preprint.cls
+    docx:
+      reference-doc: psicologica-reference.docx
+      fig-dpi: 300

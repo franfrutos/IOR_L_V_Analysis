@@ -1,0 +1,33 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+Rplots.pdf
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
+**/*.quarto_ipynb
+
+# Legacy files of the original submission (kept locally, not part of the repository)
+/Analysis/
+/Data/
+/Paper/
+/plots/
+/data.RData
+/exp_1_analisys.Rmd
+/exp_2_analisys.Rmd
+/forestplot.png
+/readme.txt
+
+# Only the final manuscript is kept (the .tex and the class are copied to the
+# root when rendering)
+/ior_lv_manuscript.tex
+/psicologica_preprint.cls
+/output/manuscript/*
+!/output/manuscript/*.pdf
+
+/.quarto/
+
+# Cover letters and other editorial documents
+/editorial/
