@@ -7,7 +7,7 @@ This project is the repository for all data, scripts, and materials used for the
 The project is organized into the following main sections:
 
 - **Input**: Where the raw data of Experiment 1 and Experiment 2 are stored.
-- **Output**: R objects of the analyses, figures generated from **scripts**, and the rendered manuscript.
+- **Output**: R objects of the analyses and figures generated from **scripts**.
 - **Scripts**: Includes scripts used to load and preprocess data, and execute the analysis.
 - **Materials**: Contains the OpenSesame tasks employed in Experiment 1 and Experiment 2.
 - **_extensions**: Quarto extension used to render the manuscript (`ior_lv_manuscript.qmd`) with the *Psicológica* template.

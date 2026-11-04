@@ -17,7 +17,8 @@ p_load(dplyr, # Data wrangling
        emmeans, # Contrasts
        BayesFactor, # Bayes factors
        lme4, # GLMM and LMM
-       lmerTest, # P-values in summary
+       car, # ANOVA-like tables of the mixed models
+       marginaleffects, # Model predictions and contrasts
        ggplot2, # Plotting
        patchwork
 )
@@ -32,6 +33,100 @@ d_e1 <- filter(raw, Experiment == "Experiment 1")
 d_e2 <- filter(raw, Experiment == "Experiment 2")
 by_cells <- c("Experiment", "SOA", "Value", "Cueing")
 within <- c("SOA", "Value", "Cueing")
+
+# Predicted proportion of errors of a logistic mixed model
+predicted_errors <- function(model, spec) {
+  as.data.frame(emmeans(model, spec, type = "response")) %>%
+    transmute(
+      level = .data[[all.vars(spec)[1]]],
+      emmean = 1 - prob, lower.CL = 1 - asymp.UCL, upper.CL = 1 - asymp.LCL
+    )
+}
+
+# Reward phase of both experiments ----
+cells_R <- bind_rows(
+  cell_means(d_e1, 1:8, by = by_cells),
+  cell_means(d_e2, 2:8, by = by_cells)
+)
+
+aov_R_rt <- rm_anova(cells_R, "RT", within, between = "Experiment")
+aov_R_rt
+
+cue_R <- cueing_effects(aov_R_rt)
+cue_R
+
+rt_by_experiment_R <- as.data.frame(emmeans(aov_R_rt, ~ Experiment))
+rt_by_value_R <- as.data.frame(emmeans(aov_R_rt, ~ Value))
+
+# Experiment x SOA x Value: effect of value (High - Low) at the long minus the
+# short SOA in each experiment
+value_by_soa_R <- as.data.frame(summary(
+  pairs(pairs(emmeans(aov_R_rt, ~ Value | SOA * Experiment)), by = "Experiment"),
+  infer = TRUE
+))
+rt_by_experiment_R
+rt_by_value_R
+value_by_soa_R
+
+aov_R_long <- rm_anova(filter(cells_R, SOA == "Long"), "RT", c("Value", "Cueing"), between = "Experiment")
+aov_R_long
+
+bf_R_3way <- bf_contrast(interaction_scores(cells_R, "RT")$three_way)
+bf_R_long <- bf_contrast(ior_scores(cells_R, "RT")$IOR_diff)
+bf_R_3way
+bf_R_long # BF01 > 3
+
+# Accuracy: logistic mixed model on the proportion of correct responses in each
+# cell, weighted by the number of trials (same fit as the trial-level model)
+d_glm_R <- raw %>%
+  filter(Phase == "Reward") %>%
+  summarise(ACC = mean(correct), n = n(), .by = c(ID, Experiment, SOA, Value, Cueing)) %>%
+  mutate(across(c(SOA, Value, Cueing, Experiment), factor))
+contrasts(d_glm_R$SOA) <- contr.sum(2) / 2
+contrasts(d_glm_R$Value) <- contr.sum(2) / 2
+contrasts(d_glm_R$Cueing) <- contr.sum(2) / 2
+contrasts(d_glm_R$Experiment) <- contr.sum(2) / 2
+
+glmm_R_acc_max <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + (SOA * Value * Cueing | ID),
+  data = d_glm_R,
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit
+
+glmm_R_acc_2way <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + ((SOA + Value + Cueing)^2 | ID),
+  data = d_glm_R,
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit
+
+glmm_R_acc_main <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + (SOA + Value + Cueing | ID),
+  data = d_glm_R,
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit (Value has the smallest variance)
+
+glmm_R_acc <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + (SOA + Cueing | ID),
+  data = d_glm_R,
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Maximal feasible model
+summary(glmm_R_acc)
+
+acc_R_anova <- Anova(glmm_R_acc, type = 3) # ANOVA-like table
+acc_R_anova
+
+# No effect involving Value or Cueing, so the RTs are not affected by a
+# speed-accuracy trade-off and the IES is not analyzed
+err_R_experiment <- predicted_errors(glmm_R_acc, ~ Experiment)
+err_R_experiment
 
 # No-reward phase: first two no-reward blocks of each experiment (exploratory) ----
 cells_NR <- bind_rows(
@@ -59,34 +154,64 @@ aov_NR_long
 aov_NR_short
 ior_by_value_NR
 
-# Accuracy: logistic mixed model
+# Accuracy: logistic mixed model on the proportion of correct responses in each
+# cell, weighted by the number of trials (same fit as the trial-level model)
 d_glm <- raw %>%
   filter(Block %in% 9:10) %>%
+  summarise(ACC = mean(correct), n = n(), .by = c(ID, Experiment, SOA, Value, Cueing)) %>%
   mutate(across(c(SOA, Value, Cueing, Experiment), factor))
 contrasts(d_glm$SOA) <- contr.sum(2) / 2
 contrasts(d_glm$Value) <- contr.sum(2) / 2
 contrasts(d_glm$Cueing) <- contr.sum(2) / 2
 contrasts(d_glm$Experiment) <- contr.sum(2) / 2
 
-glmm_NR_acc <- glmer(
-  correct ~ SOA * Value * Cueing * Experiment + (1 | ID),
+glmm_NR_acc_max <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + (SOA * Value * Cueing | ID),
   data = d_glm,
-  family = binomial(link = "logit"),
-  control = glmerControl(optimizer = "bobyqa")
-)
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit
+
+glmm_NR_acc_2way <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + ((SOA + Value + Cueing)^2 | ID),
+  data = d_glm,
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit
+
+glmm_NR_acc_main <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + (SOA + Value + Cueing | ID),
+  data = d_glm,
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit (Value has the smallest variance)
+
+glmm_NR_acc_main2 <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + (SOA + Cueing | ID),
+  data = d_glm,
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit (Cueing has the smallest variance)
+
+glmm_NR_acc <- glmer(
+  ACC ~ SOA * Value * Cueing * Experiment + (SOA | ID),
+  data = d_glm,
+  family = binomial(),
+  weights = n,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Maximal feasible model
 summary(glmm_NR_acc)
-acc_terms <- as.data.frame(coef(summary(glmm_NR_acc)))
+
+acc_anova <- Anova(glmm_NR_acc, type = 3) # ANOVA-like table
+acc_anova
 
 # Predicted proportion of errors by SOA and by Experiment
-predicted_errors <- function(spec) {
-  as.data.frame(emmeans(glmm_NR_acc, spec, type = "response")) %>%
-    transmute(
-      level = .data[[all.vars(spec)[1]]],
-      emmean = 1 - prob, lower.CL = 1 - asymp.UCL, upper.CL = 1 - asymp.LCL
-    )
-}
-err_NR_soa <- predicted_errors(~ SOA)
-err_NR_experiment <- predicted_errors(~ Experiment)
+err_NR_soa <- predicted_errors(glmm_NR_acc, ~ SOA)
+err_NR_experiment <- predicted_errors(glmm_NR_acc, ~ Experiment)
 err_NR_soa
 err_NR_experiment
 
@@ -105,22 +230,6 @@ cells_NR_all <- bind_rows(
 )
 aov_NR_all_ies <- rm_anova(cells_NR_all, "IES", within, between = "Experiment")
 aov_NR_all_ies
-
-# Reward phase of both experiments ----
-cells_R <- bind_rows(
-  cell_means(d_e1, 1:8, by = by_cells),
-  cell_means(d_e2, 2:8, by = by_cells)
-)
-
-aov_R_rt <- rm_anova(cells_R, "RT", within, between = "Experiment")
-aov_R_rt
-aov_R_long <- rm_anova(filter(cells_R, SOA == "Long"), "RT", c("Value", "Cueing"), between = "Experiment")
-aov_R_long
-
-bf_R_3way <- bf_contrast(interaction_scores(cells_R, "RT")$three_way)
-bf_R_long <- bf_contrast(ior_scores(cells_R, "RT")$IOR_diff)
-bf_R_3way
-bf_R_long # BF01 > 3
 
 # Comparison between phases ----
 # Last two reward blocks vs. first two no-reward blocks (adjacent, same trials)
@@ -171,43 +280,88 @@ d_bins <- raw %>%
     exp = ifelse(Experiment == "Experiment 2", .5, -.5)
   )
 
+lmm_bins_max <- lmer(
+  rt ~ cue * val * (bin_rel + phase) + exp + (cue * val * (bin_rel + phase) | ID),
+  data = d_bins,
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit
+
+lmm_bins_2way <- lmer(
+  rt ~ cue * val * (bin_rel + phase) + exp +
+    (cue * val + cue:bin_rel + cue:phase + val:bin_rel + val:phase + bin_rel + phase | ID),
+  data = d_bins,
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Singular fit
+
 lmm_bins <- lmer(
-  rt ~ cue * val * (bin_rel + phase) + exp + (cue * val + bin_rel + phase || ID),
+  rt ~ cue * val * (bin_rel + phase) + exp + (cue + val + bin_rel + phase | ID),
+  data = d_bins,
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
+) # Maximal feasible model
+summary(lmm_bins)
+
+bins_anova <- Anova(lmm_bins, type = 3) # ANOVA-like table
+bins_anova
+
+# Model predictions (fixed effects) of IOR (Cued - Uncued) for each target value
+# and of their difference (Low - High) by bin
+grid_bins <- expand.grid(val = c(-.5, .5), Bin = c(seq(1, 4, by = .05), 5)) %>%
+  mutate(bin_rel = pmin(Bin, 4) - 4, phase = as.numeric(Bin > 4.5), exp = 0, cue = 0, ID = NA)
+
+ior_pred <- comparisons(
+  lmm_bins,
+  variables = list(cue = c(-.5, .5)),
+  newdata = grid_bins,
+  re.form = NA
+)
+
+diff_pred <- comparisons(
+  lmm_bins,
+  variables = list(cue = c(-.5, .5)),
+  newdata = grid_bins,
+  re.form = NA,
+  hypothesis = difference ~ reference | Bin
+)
+
+pred_bins <- bind_rows(
+  as.data.frame(ior_pred) %>%
+    transmute(Bin, Value = ifelse(val > 0, "Low", "High"), estimate, conf.low, conf.high),
+  as.data.frame(diff_pred) %>%
+    transmute(Bin, Value = "Difference", estimate, statistic, p.value, conf.low, conf.high)
+)
+
+# Differences between experiments (Experiment 2 had one reward block fewer and
+# two no-reward blocks more). Experiment is between participants, so the random
+# effects are those of lmm_bins
+lmm_bins_exp <- lmer(
+  rt ~ cue * val * (bin_rel + phase) * exp + (cue + val + bin_rel + phase | ID),
   data = d_bins,
   control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
 )
-summary(lmm_bins)
+summary(lmm_bins_exp)
 
-bins_terms <- as.data.frame(coef(summary(lmm_bins)))[
-  c("cue", "cue:bin_rel", "cue:phase", "cue:val", "cue:val:bin_rel", "cue:val:phase"),
-]
-bins_terms
+bins_exp_anova <- Anova(lmm_bins_exp, type = 3) # ANOVA-like table
+bins_exp_anova
 
-# Model predictions of IOR for each target value and of their difference (Low -
-# High) by bin (fixed effects, Wald 95% CI)
-predict_bins <- function(model, bins) {
-  b <- fixef(model)
-  V <- as.matrix(vcov(model))
-  grid <- expand.grid(Bin = bins, Value = c("High", "Low", "Difference"), stringsAsFactors = FALSE)
-  do.call(rbind, lapply(seq_len(nrow(grid)), function(i) {
-    phase <- as.numeric(grid$Bin[i] > 4.5)
-    bin_rel <- min(grid$Bin[i], 4) - 4
-    L <- setNames(rep(0, length(b)), names(b))
-    if (grid$Value[i] == "Difference") {
-      L[c("cue:val", "cue:val:bin_rel", "cue:val:phase")] <- c(1, bin_rel, phase)
-    } else {
-      v <- if (grid$Value[i] == "Low") .5 else -.5
-      L[c("cue", "cue:val", "cue:bin_rel", "cue:val:bin_rel", "cue:phase", "cue:val:phase")] <-
-        c(1, v, bin_rel, v * bin_rel, phase, v * phase)
-    }
-    est <- sum(L * b)
-    se <- sqrt(drop(t(L) %*% V %*% L))
-    data.frame(Bin = grid$Bin[i], Value = grid$Value[i], estimate = est,
-               conf.low = est - 1.96 * se, conf.high = est + 1.96 * se)
-  }))
-}
+# IOR_Low - IOR_High in each experiment at the end of the reward phase (phase = 0)
+# and in the no-reward bin (phase = 1)
+grid_exp <- expand.grid(val = c(-.5, .5), phase = 0:1, exp = c(-.5, .5)) %>%
+  mutate(
+    Experiment = ifelse(exp > 0, "Experiment 2", "Experiment 1"),
+    cell = paste(Experiment, phase), bin_rel = 0, cue = 0, ID = NA
+  )
 
-pred_bins <- predict_bins(lmm_bins, c(seq(1, 4, by = .05), 5))
+diff_exp <- comparisons(
+  lmm_bins_exp,
+  variables = list(cue = c(-.5, .5)),
+  newdata = grid_exp,
+  re.form = NA,
+  hypothesis = difference ~ reference | cell
+) %>%
+  as.data.frame() %>%
+  left_join(distinct(grid_exp, cell, Experiment, phase), by = "cell") %>%
+  select(Experiment, phase, estimate, statistic, p.value, conf.low, conf.high)
+diff_exp
 
 # Observed IOR by bin (mean and SE across participants)
 ior_bins <- d_bins %>%
@@ -248,17 +402,21 @@ d_aware <- raw %>%
   )
 
 lmm_aware <- lmer(
-  rt ~ val * acc_z + soa * cue + exp + (val | ID),
+  rt ~ val * acc_z + soa * cue + exp + (val + soa * cue | ID),
   data = d_aware,
   control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
-)
+) # Maximal model
 summary(lmm_aware)
-aware_terms <- as.data.frame(coef(summary(lmm_aware)))[c("val", "val:acc_z"), ]
-aware_terms
+
+aware_anova <- Anova(lmm_aware, type = 3) # ANOVA-like table
+aware_anova
 
 # Figures ----
-fig_pooled <- plot_cells(cells_NR, limits = c(320, 400))
-ggsave("output/figures/fig-5.png", fig_pooled, height = 9, width = 14, dpi = 600, units = "cm")
+fig_pooled <- plot_two_panels(
+  plot_cells(cells_R, limits = c(330, 390)),
+  plot_cells(cells_NR, limits = c(330, 390))
+)
+ggsave("output/figures/fig-5.png", fig_pooled, height = 9, width = 20, dpi = 600, units = "cm")
 
 # IOR by bin (A) and the difference between high and low value targets (B). Green
 # and purple, as red and blue are used for Cueing.
@@ -285,6 +443,16 @@ ggsave("output/figures/fig-blocks.png", fig_blocks, height = 13, width = 16, dpi
 
 save_analysis_objects(
   "analysis_pooled",
+  aov_R_rt = aov_R_rt,
+  cue_R = cue_R,
+  rt_by_experiment_R = rt_by_experiment_R,
+  rt_by_value_R = rt_by_value_R,
+  value_by_soa_R = value_by_soa_R,
+  aov_R_long = aov_R_long,
+  bf_R_3way = bf_R_3way,
+  bf_R_long = bf_R_long,
+  acc_R_anova = acc_R_anova,
+  err_R_experiment = err_R_experiment,
   aov_NR_rt = aov_NR_rt,
   cue_NR = cue_NR,
   rt_by_experiment = rt_by_experiment,
@@ -292,7 +460,7 @@ save_analysis_objects(
   aov_NR_long = aov_NR_long,
   aov_NR_short = aov_NR_short,
   ior_by_value_NR = ior_by_value_NR,
-  acc_terms = acc_terms,
+  acc_anova = acc_anova,
   err_NR_soa = err_NR_soa,
   err_NR_experiment = err_NR_experiment,
   aov_NR_ies = aov_NR_ies,
@@ -301,15 +469,13 @@ save_analysis_objects(
   aov_NR_short_ies = aov_NR_short_ies,
   ior_by_value_NR_ies = ior_by_value_NR_ies,
   aov_NR_all_ies = aov_NR_all_ies,
-  aov_R_rt = aov_R_rt,
-  aov_R_long = aov_R_long,
-  bf_R_3way = bf_R_3way,
-  bf_R_long = bf_R_long,
   aov_phase_rt = aov_phase_rt,
   aov_phase_long = aov_phase_long,
   bf_phase_4way = bf_phase_4way,
   bf_phase_long = bf_phase_long,
-  bins_terms = bins_terms,
+  bins_anova = bins_anova,
   pred_bins = pred_bins,
-  aware_terms = aware_terms
+  bins_exp_anova = bins_exp_anova,
+  diff_exp = diff_exp,
+  aware_anova = aware_anova
 )

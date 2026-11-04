@@ -7,8 +7,8 @@ affiliations) and
   * LaTeX: writes authblk commands (\author[1,2]{Name\,\orcidlink{..}},
     \affil[1]{..}), \corrauthor{..}, \runningauthor{..} and \authornote{..}
     into template variables used by partials/title.tex.
-  * DOCX: builds the title page (authors with superscript affiliation
-    numbers, affiliations, running head, corresponding author, ORCID iDs,
+  * DOCX: builds the title page (authors with ORCID icons and superscript
+    affiliation numbers, affiliations, running head, corresponding author,
     author note, abstract, keywords) as styled paragraphs and removes the
     metadata pandoc would otherwise render on its own.
 
@@ -202,6 +202,9 @@ end
 
 -- DOCX ------------------------------------------------------------------------
 
+-- ORCID icon shipped with the extension, next to this filter
+local ORCID_ICON = pandoc.path.join({ pandoc.path.directory(PANDOC_SCRIPT_FILE), "orcid.png" })
+
 local function styled(style, blocks)
   return pandoc.Div(blocks, pandoc.Attr("", {}, { ["custom-style"] = style }))
 end
@@ -217,6 +220,11 @@ local function docx_frontmatter(doc)
   local authors, affils = collect(meta)
   local front = pandoc.Blocks({})
 
+  -- running head: invisible paragraph (1 pt white text) that the footer of the
+  -- reference document shows with STYLEREF "Running Head"
+  local ra = running_author_inlines(meta, authors)
+  if ra then front:insert(styled("Running Head", { pandoc.Para(ra) })) end
+
   -- authors line: "A¹˒², B², and C³"
   if #authors > 0 then
     local line = pandoc.Inlines({})
@@ -230,6 +238,13 @@ local function docx_frontmatter(doc)
         end
       end
       line:extend(a.name)
+      -- ORCID icon linked to the profile, as \orcidlink in the PDF
+      if a.orcid then
+        local url = "https://orcid.org/" .. a.orcid
+        line:insert(pandoc.Str(" "))
+        line:insert(pandoc.Link({ pandoc.Image({}, ORCID_ICON, "ORCID iD",
+          pandoc.Attr("", {}, { width = "0.13in", height = "0.13in" })) }, url))
+      end
       if #a.numbers > 0 then
         line:insert(pandoc.Superscript({ pandoc.Str(table.concat(a.numbers, ",")) }))
       end
@@ -248,10 +263,8 @@ local function docx_frontmatter(doc)
     front:insert(styled("Affiliation", paras))
   end
 
-  -- notes: running head, corresponding author, ORCID iDs, author note
+  -- notes: corresponding author, author note
   local notes = {}
-  local ra = running_author_inlines(meta, authors)
-  if ra then table.insert(notes, labelled_para("Running head", ra)) end
 
   if is_true(meta["corresponding-note"], true) then
     for _, a in ipairs(corresponding_authors(authors)) do
@@ -270,20 +283,6 @@ local function docx_frontmatter(doc)
       end
       table.insert(notes, labelled_para("Corresponding author", ils))
     end
-  end
-
-  local orcids = {}
-  for _, a in ipairs(authors) do
-    if a.orcid then
-      local ils = pandoc.Inlines({})
-      ils:extend(a.name)
-      ils:extend({ pandoc.Space(),
-        pandoc.Link({ pandoc.Str("https://orcid.org/" .. a.orcid) }, "https://orcid.org/" .. a.orcid) })
-      table.insert(orcids, ils)
-    end
-  end
-  if #orcids > 0 then
-    table.insert(notes, labelled_para("ORCID iDs", join_inlines(orcids, { pandoc.Str(";"), pandoc.Space() })))
   end
 
   if nonempty(meta.authornote) then

@@ -326,6 +326,13 @@ min_p <- function(model, terms = NULL, exclude = NULL) {
   paste0("> ", sub("^0", "", formatC(floor(p * 100) / 100, digits = 2, format = "f")))
 }
 
+# Same for the terms of a mixed model (car::Anova table)
+min_p_chisq <- function(table, exclude = NULL) {
+  keep <- !rownames(table) %in% c("(Intercept)", exclude)
+  p <- min(table[keep, "Pr(>Chisq)"])
+  paste0("> ", sub("^0", "", formatC(floor(p * 100) / 100, digits = 2, format = "f")))
+}
+
 # One row of emmeans pairwise comparisons
 latex_emm_row <- function(row, digits = 2, ci = FALSE) {
   ci_part <- if (ci) {
@@ -343,24 +350,20 @@ latex_emm_row <- function(row, digits = 2, ci = FALSE) {
   )
 }
 
-# GLMM coefficient (Wald 95% CI)
-latex_glmm_term <- function(terms, term, digits = 2) {
-  b <- terms[term, "Estimate"]
-  se <- terms[term, "Std. Error"]
+# Estimate and 95% CI of one row of a marginaleffects contrast
+latex_me <- function(row, digits = 2) {
   paste0(
-    "$\\hat{\\beta} = ", format_num_latex(b, digits), "$, ",
-    "95\\% CI $[", format_num_latex(b - 1.96 * se, digits), ", ", format_num_latex(b + 1.96 * se, digits), "]$, ",
-    "$z = ", format_num_latex(terms[term, "z value"], digits), "$, ",
-    "$p ", format_p_latex(terms[term, "Pr(>|z|)"]), "$"
+    "$\\Delta M = ", format_num_latex(row$estimate, digits), "$, ",
+    "95\\% CI $[", format_num_latex(row$conf.low, digits), ", ",
+    format_num_latex(row$conf.high, digits), "]$"
   )
 }
 
-# LMM coefficient (lmerTest, Satterthwaite df)
-latex_lmm_beta <- function(terms, term, label, digits = 2) {
+# Wald chi-square test of a mixed-model term (car::Anova table)
+latex_chisq_term <- function(table, term, digits = 2) {
   paste0(
-    "$\\beta_{", label, "} = ", format_num_latex(terms[term, "Estimate"], digits), "$, ",
-    "$t_{", format_num_latex(terms[term, "df"], 0), "} = ", format_num_latex(terms[term, "t value"], digits), "$, ",
-    "$p ", format_p_latex(terms[term, "Pr(>|t|)"]), "$"
+    "$\\chi^2(", table[term, "Df"], ") = ", format_num_latex(table[term, "Chisq"], digits), "$, ",
+    "$p ", format_p_latex(table[term, "Pr(>Chisq)"]), "$"
   )
 }
 
@@ -396,11 +399,13 @@ ensure_project_dirs <- function() {
 }
 
 # afex objects keep the environment of their formula (with all the data), so
-# only their ANOVA table is saved
+# only their ANOVA table is saved. marginaleffects results keep the fitted model
+# as an attribute, which is dropped
 slim_object <- function(x) {
   if (inherits(x, "afex_aov")) {
     return(list(anova_table = x$anova_table))
   }
+  attr(x, "marginaleffects") <- NULL
   x
 }
 

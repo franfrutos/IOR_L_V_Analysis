@@ -47,4 +47,6 @@ contributes:
         - psicologica_preprint.cls
     docx:
       reference-doc: psicologica-reference.docx
+      # Citations in black, as in the journal's Word template
+      link-citations: false
       fig-dpi: 300
