@@ -150,9 +150,11 @@ cueing_by_experiment <- as.data.frame(summary(
 aov_NR_long <- rm_anova(filter(cells_NR, SOA == "Long"), "RT", c("Value", "Cueing"))
 aov_NR_short <- rm_anova(filter(cells_NR, SOA == "Short"), "RT", c("Value", "Cueing"))
 ior_by_value_NR <- cueing_effects(aov_NR_long, by = "Value", sides = c(High = "<", Low = "<"))
+ior_diff_NR <- ior_difference(cells_NR, "RT")
 aov_NR_long
 aov_NR_short
 ior_by_value_NR
+ior_diff_NR
 
 # Accuracy: logistic mixed model on the proportion of correct responses in each
 # cell, weighted by the number of trials (same fit as the trial-level model)
@@ -222,6 +224,8 @@ cue_NR_ies <- cueing_effects(aov_NR_ies)
 aov_NR_long_ies <- rm_anova(filter(cells_NR, SOA == "Long"), "IES", c("Value", "Cueing"))
 aov_NR_short_ies <- rm_anova(filter(cells_NR, SOA == "Short"), "IES", c("Value", "Cueing"))
 ior_by_value_NR_ies <- cueing_effects(aov_NR_long_ies, by = "Value", sides = c(High = "<", Low = "<"))
+ior_diff_NR_ies <- ior_difference(cells_NR, "IES")
+ior_diff_NR_ies
 
 # IES with the four no-reward blocks of Experiment 2 (footnote)
 cells_NR_all <- bind_rows(
@@ -244,23 +248,46 @@ aov_phase_long <- rm_anova(
 )
 aov_phase_long
 
+aov_phase_ies <- rm_anova(cells_phase, "IES", c("Phase", within), between = "Experiment")
+aov_phase_ies
+
+aov_phase_long_ies <- rm_anova(
+  filter(cells_phase, SOA == "Long"), "IES", c("Phase", "Value", "Cueing"),
+  between = "Experiment"
+)
+aov_phase_long_ies
+
 # Bayes factors: change of the critical interactions from one phase to the other
-phase_scores <- full_join(
-  interaction_scores(filter(cells_phase, Phase == "Reward"), "RT") %>%
-    select(ID, Experiment, long_R = long, three_way_R = three_way),
-  interaction_scores(filter(cells_phase, Phase == "No-reward"), "RT") %>%
-    select(ID, Experiment, long_NR = long, three_way_NR = three_way),
-  by = c("ID", "Experiment")
-) %>%
-  mutate(
-    long_change = long_NR - long_R,
-    four_way = three_way_NR - three_way_R
-  )
+phase_changes <- function(dv) {
+  full_join(
+    interaction_scores(filter(cells_phase, Phase == "Reward"), dv) %>%
+      select(ID, Experiment, long_R = long, three_way_R = three_way),
+    interaction_scores(filter(cells_phase, Phase == "No-reward"), dv) %>%
+      select(ID, Experiment, long_NR = long, three_way_NR = three_way),
+    by = c("ID", "Experiment")
+  ) %>%
+    mutate(
+      long_change = long_NR - long_R,
+      four_way = three_way_NR - three_way_R
+    )
+}
+
+phase_scores <- phase_changes("RT")
+phase_scores_ies <- phase_changes("IES")
 
 bf_phase_4way <- bf_contrast(phase_scores$four_way)
 bf_phase_long <- bf_contrast(phase_scores$long_change)
+bf_phase_4way_ies <- bf_contrast(phase_scores_ies$four_way)
+bf_phase_long_ies <- bf_contrast(phase_scores_ies$long_change)
 bf_phase_4way
 bf_phase_long
+bf_phase_4way_ies
+bf_phase_long_ies
+
+# Change of the effect of value on IOR at the long SOA in each experiment
+phase_change_by_exp <- bind_rows(RT = phase_scores, IES = phase_scores_ies, .id = "measure") %>%
+  summarise(change = mean(long_change), .by = c(measure, Experiment))
+phase_change_by_exp
 
 # Time course of the effect of value on IOR ----
 # LMM on the RTs at the long SOA in bins of two blocks: bins 1-4 are the reward
@@ -460,6 +487,7 @@ save_analysis_objects(
   aov_NR_long = aov_NR_long,
   aov_NR_short = aov_NR_short,
   ior_by_value_NR = ior_by_value_NR,
+  ior_diff_NR = ior_diff_NR,
   acc_anova = acc_anova,
   err_NR_soa = err_NR_soa,
   err_NR_experiment = err_NR_experiment,
@@ -468,11 +496,17 @@ save_analysis_objects(
   aov_NR_long_ies = aov_NR_long_ies,
   aov_NR_short_ies = aov_NR_short_ies,
   ior_by_value_NR_ies = ior_by_value_NR_ies,
+  ior_diff_NR_ies = ior_diff_NR_ies,
   aov_NR_all_ies = aov_NR_all_ies,
   aov_phase_rt = aov_phase_rt,
   aov_phase_long = aov_phase_long,
+  aov_phase_ies = aov_phase_ies,
+  aov_phase_long_ies = aov_phase_long_ies,
   bf_phase_4way = bf_phase_4way,
   bf_phase_long = bf_phase_long,
+  bf_phase_4way_ies = bf_phase_4way_ies,
+  bf_phase_long_ies = bf_phase_long_ies,
+  phase_change_by_exp = phase_change_by_exp,
   bins_anova = bins_anova,
   pred_bins = pred_bins,
   bins_exp_anova = bins_exp_anova,

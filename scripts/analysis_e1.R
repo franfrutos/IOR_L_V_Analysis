@@ -111,7 +111,9 @@ ior_by_value_NR
 aov_NR_long_ies <- rm_anova(filter(cells_NR, SOA == "Long"), "IES", c("Value", "Cueing"))
 aov_NR_short_ies <- rm_anova(filter(cells_NR, SOA == "Short"), "IES", c("Value", "Cueing"))
 ior_by_value_NR_ies <- cueing_effects(aov_NR_long_ies, by = "Value", sides = c(High = "<", Low = "<"))
+ior_diff_NR_ies <- ior_difference(cells_NR, "IES")
 ior_by_value_NR_ies
+ior_diff_NR_ies
 
 # Cohen's f of the three-way interaction (sensitivity power analysis)
 f_NR_rt <- F_to_f(
@@ -188,6 +190,7 @@ save_analysis_objects(
   aov_NR_long_ies = aov_NR_long_ies,
   aov_NR_short_ies = aov_NR_short_ies,
   ior_by_value_NR_ies = ior_by_value_NR_ies,
+  ior_diff_NR_ies = ior_diff_NR_ies,
   f_NR_rt = f_NR_rt,
   f_NR_ies = f_NR_ies,
   awareness = awareness_e1,

@@ -96,6 +96,21 @@ ior_scores <- function(cells, dv = "RT") {
     )
 }
 
+# Difference in IOR between low and high value targets (positive: smaller IOR for
+# high value), in the format of cueing_effects(). t^2 = F of Value x Cueing
+ior_difference <- function(cells, dv = "RT") {
+  x <- ior_scores(cells, dv)$IOR_diff
+  tt <- t.test(x)
+  data.frame(
+    estimate = mean(x),
+    df = unname(tt$parameter),
+    t = unname(tt$statistic),
+    p = tt$p.value,
+    lower = tt$conf.int[1],
+    upper = tt$conf.int[2]
+  )
+}
+
 # SOA x Value x Cueing interaction score per participant (t^2 = ANOVA F)
 interaction_scores <- function(cells, dv = "RT") {
   cells %>%
